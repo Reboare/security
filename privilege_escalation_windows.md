@@ -158,6 +158,8 @@ systeminfo
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ```
 
+Placing systeminfo into [https://github.com/Reboare/Windows-Exploit-Suggester](https://github.com/Reboare/Windows-Exploit-Suggester), can narrow down a list of possible exploits.  This will output a very large list but it's worth trying when all other options have failed.
+
 **Python to Binary**
 
 If we have an exploit written in python but we don't have python installed on the victim-machine we can always transform it into a binary with pyinstaller. Good trick to know.
@@ -430,7 +432,6 @@ vdmexploit.dll
 ### Using Metasploit
 
 So if you have a metasploit meterpreter session going you can run `getsystem`.
-
 
 ## Post modules
 

