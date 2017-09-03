@@ -101,6 +101,8 @@
 * [Wifi](wifi.md)
   * [WEP](wep.md)
   * [WPS](wps.md)
+* [Miscellaneous](miscellaneous.md)
+  * [Steganography](miscellaneous/a.md)
 * [Physical access to machine](physical_access_to_machine.md)
 * [Literature](littearature.md)
 * [Quick Refernces](quick-refernces.md)
