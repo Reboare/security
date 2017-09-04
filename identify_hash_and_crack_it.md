@@ -67,7 +67,7 @@ If you do not find the password you can add the john-rules. Which add numbers an
 john --rules --wordlist=wordlist.txt dump.txt
 ```
 
-Traditionally if you're not just cracking a hash, but an ssh key for instance, it can be converted into a hash with the \*2john utility.  
+Traditionally if you're not just cracking a hash, but an ssh key for instance, it can be converted into a hash with the \*2john utilities.
 
 #### Linux shadow password
 
