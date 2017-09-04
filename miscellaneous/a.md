@@ -1,10 +1,10 @@
 # Steganography
 
-This is the art of hiding information within other files so that they appear to be something else.  This article will only go over the most common and obvious methods of hiding information as there are numerous possible ways of actually hiding data. 
+This is the art of hiding information within other files so that they appear to be something else.  This article will only go over the most common and obvious methods of hiding information as there are numerous possible ways of actually hiding data.
 
 The obvious is to simply check for information encoded as text within the file.  Running cat on the file can show the most obvious examples of hidden information.  In examples like this it will be stored outside of the boundaries of the bytes marking the file type.  Running `strings` can have the same effect.
 
-Data hidden within exif is another popular method of hiding data, but finding this is as simple as running something like [exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/). 
+Data hidden within exif is another popular method of hiding data, but finding this is as simple as running something like [exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/).
 
 ```
 cat file.png
@@ -17,8 +17,6 @@ It can also be worth doing a preliminary check with [steghide](http://steghide.s
 ```
 steghide extract -sf file.png
 ```
-
-
 
 
 

@@ -1,8 +1,24 @@
 # Cryptography
 
-## RSA
+## Modern
 
-[https://github.com/Ganapati/RsaCtfTool](https://github.com/Ganapati/RsaCtfTool)
+### RSA
+
+Use [RSACtfTool ](https://github.com/Ganapati/RsaCtfTool)for any RSA keys which appear to be obviously weak.  It runs a full suite of tests so it can be used to rule out anything obvious.
+
+```bash
+./RsaCtfTool.py --publickey ./key.pub --uncipher ./ciphered\_file
+```
+
+### Elliptic-Curve Cryptography
+
+When trying to decrypt or encrypt with elliptic-curve cryptography the recommended tool is [seccure](http://point-at-infinity.org/seccure/) or [python-seccure](https://pypi.python.org/pypi/seccure).
+
+```py
+seccure.decrypt(ciphertext, b'my private key')
+```
+
+## Classical
 
 
 
