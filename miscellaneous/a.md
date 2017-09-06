@@ -18,5 +18,14 @@ It can also be worth doing a preliminary check with [steghide](http://steghide.s
 steghide extract -sf file.png
 ```
 
+## Audio
+
+* Images can be hidden within the spectrogram of an audio file, the encoding method seen [here](https://solusipse.net/blog/post/basic-methods-of-audio-steganography-spectrograms/).  The best tool for this is [Sonic Visualiser](http://www.sonicvisualiser.org/).  
+* Data can be hidden within the Least-Significant bit of the audio file.
+  * The [Derbycon writeup](https://ethackal.github.io/2015/10/05/derbycon-ctf-wav-steganography/) gives an example of decoding this kind of data. 
+* d
+* d
+* d
+* 
 
 
