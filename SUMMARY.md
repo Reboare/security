@@ -103,6 +103,7 @@
   * [WPS](wps.md)
 * [Cryptography](miscellaneous/cryptography.md)
 * [Steganography](miscellaneous/a.md)
+* [Reverse Engineering](reverse-engineering.md)
 * [Physical access to machine](physical_access_to_machine.md)
 * [Literature](littearature.md)
 * [Quick Refernces](quick-refernces.md)
