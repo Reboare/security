@@ -18,5 +18,6 @@ rksh
 ksh -r
 ```
 
-http://securebean.blogspot.cl/2014/05/escaping-restricted-shell_3.html?view=sidebar
-http://pen-testing.sans.org/blog/pen-testing/2012/06/06/escaping-restricted-linux-shells
+[http://securebean.blogspot.cl/2014/05/escaping-restricted-shell\_3.html?view=sidebar](http://securebean.blogspot.cl/2014/05/escaping-restricted-shell_3.html?view=sidebar)  
+[http://pen-testing.sans.org/blog/pen-testing/2012/06/06/escaping-restricted-linux-shells](http://pen-testing.sans.org/blog/pen-testing/2012/06/06/escaping-restricted-linux-shells)
+
