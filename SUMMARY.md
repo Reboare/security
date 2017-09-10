@@ -50,7 +50,7 @@
       * [XML External Entity Attack](xml_external_entity_attack.md)
       * [Bypass File Upload Filtering](bypass_image_upload.md)
       * [Exposed Version Control](exposed_version_control.md)
-      * Directory Traversal Attack
+      * [Directory Traversal Attack](directory-traversal-attack.md)
       * [Host Header Attack](host-header-attack.md)
       * [Padding Oracle Attack](padding-oracle-attack.md)
     * [Attacking the User](attacking_the_user.md)
