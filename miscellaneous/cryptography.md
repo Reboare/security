@@ -18,7 +18,9 @@ When trying to decrypt or encrypt with elliptic-curve cryptography the recommend
 seccure.decrypt(ciphertext, b'my private key')
 ```
 
-## Classical
+## Classical Ciphers
+
+The most difficult element of cracking a cipher is identifying it's type.  There are a number of markers however that can help in reducing the search space.  A good resource for this is [Practical Cryptography's Guide](http://practicalcryptography.com/cryptanalysis/text-characterisation/identifying-unknown-ciphers/).
 
 
 
