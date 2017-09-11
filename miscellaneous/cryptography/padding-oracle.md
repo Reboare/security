@@ -13,13 +13,13 @@ A padding oracle attack, attacks the general decryption mechanism used by a remo
 A tool called [padbuster](https://github.com/GDSSecurity/PadBuster), is incredibly effective at exploiting these vulnerabilities automatically.  The following example will decrypt a base64 encoded ciphertext using the padding oracle attack.
 
 ```bash
-padbuster <url> <codetodecrypt> <blocksize> -encoding 0  -cookies <cookies>  -veryverbose
+padbuster <url> <codetodecrypt> <blocksize> -encoding 0  -cookies <cookies>  -veryverbose
 ```
 
 Once you've decrypted and edited the cookie, you can use the same tool and methods to re-encrypt the cookie.
 
 ```bash
-padbuster <url> <codetodecrypt> <blocksize> -encoding 0 -plaintext <toencrypt> -cookies <cookies>  -veryverbose
+padbuster <url> <codetodecrypt> <blocksize> -encoding 0 -plaintext <toencrypt> -cookies <cookies>  -veryverbose
 ```
 
 ### Alternatives
@@ -37,6 +37,8 @@ TODO: Understand the solution correctly, modify these examples and make sure the
 [https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth](https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth)
 
 [https://blog.skullsecurity.org/2013/a-padding-oracle-example](https://blog.skullsecurity.org/2013/a-padding-oracle-example)
+
+[https://robertheaton.com/2013/07/29/padding-oracle-attack/](https://robertheaton.com/2013/07/29/padding-oracle-attack/)
 
 [https://cryptopals.com/sets/3/challenges/17](https://cryptopals.com/sets/3/challenges/17)
 
