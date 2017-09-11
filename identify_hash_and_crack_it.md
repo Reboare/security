@@ -78,6 +78,10 @@ unshadow passwd-file.txt shadow-file.txt > unshadowed.txt
 john --rules --wordlist=wordlist.txt unshadowed.txt
 ```
 
+### fcrackzip
+
+John and hashcat don't play well with .zip files for some reason so the tool [fcrackzip](https://github.com/hyc/fcrackzip), is recommended for this file format.
+
 ### Rainbow tables
 
 So basically a rainbow table is a precalculated list of passwords. So instead of having to hash the word you want to try you create a list of hashes. So you do not have to hash them before comparing. This might take a long time to do, hashing a whole wordlist, but when you do the comparison between the password and the test-word it will go a lot faster.
