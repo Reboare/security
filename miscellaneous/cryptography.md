@@ -20,5 +20,5 @@ seccure.decrypt(ciphertext, b'my private key')
 
 ## Classical
 
-
+A critical skill in cracking a cipher is identifying the type of cipher it has been encrypted with, then practical cryptography has a good [guide](http://practicalcryptography.com/cryptanalysis/text-characterisation/identifying-unknown-ciphers/) to allowing you to begin initial analysis.  
 
