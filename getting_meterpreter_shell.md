@@ -107,5 +107,13 @@ set session 1
 exploit
 ```
 
-Now metasploit will create a new session with meterpeter that will be available to you.
+Now metasploit will create a new session with meterpeter that will be available to you.  Alternatively:
+
+```
+sessions -u 1
+```
+
+This will do the same.
+
+
 
