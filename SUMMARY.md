@@ -114,7 +114,7 @@
 * [Physical access to machine](physical_access_to_machine.md)
 * [Writeups](writeups.md)
   * [HackTheBox](writeups/hackthebox.md)
-    * [10.10.10.3 ](writeups/hackthebox/1010103.md)
+    * [10.10.10.3 \(Lame\) ](writeups/hackthebox/1010103.md)
   * [Vulnhub](writeups/vulnhub.md)
   * [RopEmporium](writeups/ropemporium.md)
 * [Literature](littearature.md)
