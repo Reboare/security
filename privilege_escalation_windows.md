@@ -196,7 +196,7 @@ If you find a service that has write permissions set to `everyone` you can chang
 
 First we need to find services. That can be done using `wmci` or `sc.exe`. Wmci is not available on all windows machines, and it might not be available to your user. If you don't have access to it, you can use `sc.exe`.
 
-**WMCI**
+**WMIC**
 
 ```
 wmic service list brief
