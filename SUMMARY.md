@@ -115,6 +115,7 @@
 * [Writeups](writeups.md)
   * [HackTheBox](writeups/hackthebox.md)
     * [10.10.10.3 \(Lame\) ](writeups/hackthebox/1010103.md)
+    * [10.10.10.4 \(Legacy\)](writeups/hackthebox/1010104-legacy.md)
   * [Vulnhub](writeups/vulnhub.md)
   * [RopEmporium](writeups/ropemporium.md)
 * [Literature](littearature.md)
