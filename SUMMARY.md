@@ -120,6 +120,7 @@
     * [10.10.10.6 \(Popcorn\)](writeups/hackthebox/1010106-popcorn.md)
   * [Vulnhub](writeups/vulnhub.md)
   * [RopEmporium](writeups/ropemporium.md)
+  * [Matasano Cryptopals](writeups/matasano-cryptopals.md)
 * [Literature](littearature.md)
 * [Quick Refernces](quick-refernces.md)
   * [Quick Commands](quick-refernces/quick-commands.md)
