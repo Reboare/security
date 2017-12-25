@@ -76,9 +76,9 @@
   * [Editing Exploits](editing-exploits.md)
   * [Compiling windows exploits](compiling-windows-exploits.md)
   * [Buffer Overflows](buffer-overflows.md)
-    * Windows
+    * [Windows](buffer-overflows/windows.md)
     * [Linux](buffer-overflows/linux.md)
-      * ret2libc
+      * [ret2libc](buffer-overflows/linux/ret2libc.md)
 * [Post Exploitation](post_exploitation.md)
   * [Spawning Shells](spawning_shells.md)
   * [Meterpreter for Post-Exploitation](getting_meterpreter_shell.md)
