@@ -108,7 +108,7 @@ Another way to test it is to see if the server tries to download the external sc
 
 ### Exfiltrate data through URL
 
-https://blog.bugcrowd.com/advice-from-a-researcher-xxe/
+[https://blog.bugcrowd.com/advice-from-a-researcher-xxe/](https://blog.bugcrowd.com/advice-from-a-researcher-xxe/)
 
 ### References
 
@@ -116,5 +116,7 @@ https://blog.bugcrowd.com/advice-from-a-researcher-xxe/
 
 [https://blog.bugcrowd.com/advice-from-a-researcher-xxe/](https://blog.bugcrowd.com/advice-from-a-researcher-xxe/)
 
-http://blog.h3xstream.com/2014/06/identifying-xml-external-entity.html
+[http://blog.h3xstream.com/2014/06/identifying-xml-external-entity.html](http://blog.h3xstream.com/2014/06/identifying-xml-external-entity.html)
+
+[https://blog.zsec.uk/blind-xxe-learning/](https://blog.zsec.uk/blind-xxe-learning/)
 
