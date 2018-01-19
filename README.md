@@ -1,4 +1,4 @@
-# Security Prepration Repository
+# Security Preperation Repository
 
 Welcome to the Reboare/Booj Security wiki!
 
@@ -8,7 +8,7 @@ If you feel like this is a good start, but you want to add and remove things and
 
 I will also be adding my writeups for various machines into this book for a few reasons.  Firstly, I'm quite lazy and don't have the energy at the moment to create and maintain a full blog, but since reporting is one of the few activities I'm quite weak at, I'm going to be attempting to write up as many of my solutions as possible.
 
-Secondly, it's a fantastic learning resource, and since I hope that some people can learn from me as I have others then there's no better way than 
+Secondly, it's a fantastic learning resource, and since I hope that some people can learn from me as I have others then there's no better way than
 
 ## Disclaimer
 
