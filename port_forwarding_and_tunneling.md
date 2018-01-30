@@ -46,7 +46,7 @@ So we can set up this port forwarding machine with the help of rinetd.
 
 To make it clear, we have the following machines:  
 Machine1 - IP: 111.111.111.111 - Behind firewall, and wants to connect to Machine3.  
-Machine2 - IP: 222.222.222.222 - Forwards incomming connections to Machine3   
+Machine2 - IP: 222.222.222.222 - Forwards incomming connections to Machine3  
 Machine3 - IP: 333.333.333.333 - Hosts the ftp-server that machine1 wants to connect to.
 
 ```
@@ -129,7 +129,7 @@ nc localhost:10000
 
 ### Remote port forwarding
 
-Remote port forwarding is crazy, yet very simple concept. So imagine that you have compromised a machine, and that machine has like MYSQL running but it is only accessible for localhost. And you can't access it because you have a really crappy shell. So what we can do is just forward that port to our attacking machine. The steps are as following:
+Remote port forwarding is crazy, yet very simple concept. So imagine that you have compromised a machine, and that machine has MYSQL running but it is only accessible for localhost.  Alternatively, you may have compromised a machine in a network and . The steps are as following:
 
 Here is how you create a remote port forwarding:
 
@@ -199,7 +199,7 @@ ssh -D localhost:9999 root@111.111.111.111
 ssh -D localhost:9999 root@111.111.111.111 -N
 ```
 
-Now you go to Firefox/settings/advanced/network and **SOCKS** you add   
+Now you go to Firefox/settings/advanced/network and **SOCKS** you add  
 **127.0.0.1** and port **9999**
 
 Notice that this setup probably leaks DNS. So don't use it if you need opsec.

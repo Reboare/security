@@ -1,14 +1,10 @@
-# Security Preperation Repository
+# Security Preparation Repository
 
 Welcome to the Reboare/Booj Security wiki!
 
 This was a fork of the [https://github.com/xapax/security](https://github.com/xapax/security) and [https://github.com/aranisec/security](https://github.com/aranisec/security) repositories, so the majority of the work in here is due to them, but I'll be adding and editing as I go through, so the majority of it from here on out will be my own work.
 
-If you feel like this is a good start, but you want to add and remove things and just fork it and make it yours.  Hopefully we can all learn from each other in that way.
-
-I will also be adding my writeups for various machines into this book for a few reasons.  Firstly, I'm quite lazy and don't have the energy at the moment to create and maintain a full blog, but since reporting is one of the few activities I'm quite weak at, I'm going to be attempting to write up as many of my solutions as possible.
-
-Secondly, it's a fantastic learning resource, and since I hope that some people can learn from me as I have others then there's no better way than
+If you feel like this is a good start, but you want to add and remove things and just fork it and make it yours.  Hopefully we can all learn from each other in that way. 
 
 ## Disclaimer
 

