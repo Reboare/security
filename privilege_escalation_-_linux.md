@@ -318,12 +318,14 @@ close OUT;
 
 ```bash
 cp /dev/fb0 /tmp/fb0.raw
-$width=cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1
-$height=cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2
+width=$(cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1)
+height=$(cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2)
 ./raw2png $width $height < /tmp/fb0.raw > /tmp/fb0.png
 ```
 
-This isn't directly exploitable, but utilized correctly can allow you to view a user with physical access' session and potentially leak information this way.
+This isn't directly exploitable, but utilized correctly can allow you to view a user with physical access' session and potentially leak information this way.  On modern systems this isn't likely exploitable.
+
+[Alternative Script](ftp://ftp.embeddedarm.com/ts-arm-sbc/ts-7350-linux/samples/bmptoraw.c)
 
 ### World writable scripts invoked as root
 
