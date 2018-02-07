@@ -1,4 +1,4 @@
-## LXD
+## LXD {#lxd}
 
 ## Privileged Containers
 

