@@ -282,11 +282,11 @@ find / -group groupname 2>/dev/null
 
 #### adm
 
-The admin group, adm, allows the user to view logs in `/var/log`.  Whilst this is not directly exploitable, it can be used to leak sensitive information, such as user actions, vulnerable applications and any potentially hidden cron-jobs.  
+The admin group, adm, allows the user to view logs in `/var/log`.  Whilst this is not directly exploitable, it can be used to leak sensitive information, such as user actions, vulnerable applications and any potentially hidden cron-jobs.
 
 #### lxd
 
-If a member of the lxd gorup, the user can use this to escalate to root, and potentially escape any containers it is a member of.  
+If a member of the lxd gorup, the user can use this to escalate to root, and potentially escape any containers it is a member of.
 
 #### docker
 
@@ -300,9 +300,42 @@ The disk group gives the user full access to any block devices contained within 
 brw-rw---- 1 root disk 8, 1 Feb  5 13:38 /dev/sda1
 ```
 
-From this we can use debugfs to enumerate the entire disk as so
+From this we can use debugfs to enumerate the entire disk with effectively root level privileges.  
 
 #### video
+
+The video group controls access to graphical output devices.  The output to screen is stored within the [framebuffer](https://www.kernel.org/doc/Documentation/fb/framebuffer.txt), which can be dumped to disk and converted to an image, using the following [script](https://www.cnx-software.com/2010/07/18/how-to-do-a-framebuffer-screenshot/):
+
+```perl
+#!/usr/bin/perl -w
+ 
+$w = shift || 240;
+$h = shift || 320;
+$pixels = $w * $h;
+ 
+open OUT, "|pnmtopng" or die "Can't pipe pnmtopng: $!\n";
+ 
+printf OUT "P6%d %d\n255\n", $w, $h;
+ 
+while ((read STDIN, $raw, 2) and $pixels--) {
+   $short = unpack('S', $raw);
+   print OUT pack("C3",
+      ($short & 0xf800) >> 8,
+      ($short & 0x7e0) >> 3,
+      ($short & 0x1f) << 3);
+}
+ 
+close OUT;
+```
+
+```bash
+cp /dev/fb0 /tmp/fb0.raw
+$width=cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1
+$height=cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2
+./raw2png $width $height < /tmp/fb0.raw > /tmp/fb0.png
+```
+
+This isn't directly exploitable, but utilised correctly can allow you to view a user with physical access' session and potentially leak information this way.
 
 #### audio
 
