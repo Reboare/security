@@ -71,7 +71,7 @@ gzdeflate()
 str_rot13()
 ```
 
-### Weevely - Incredible tool!
+### Weevely
 
 Using weevely we can create php webshells easily.
 
@@ -98,7 +98,7 @@ Call oS.Run("win.com cmd.exe /c c:\Inetpub\shell443.exe",0,True)
 
 ## Coldfusion
 
-There's the standard CFM webshell included with Kali, but it doesn't have that many features and can be a slight pain to get working.  If you're going for stealth, it's ideal but I'd recommend the CFM v3 Webshell.
+There's the standard CFM webshell included with Kali, but it doesn't have that many features and can be a slight pain to get working.  If you're going for stealth, it's easier to modify but I'd recommend the CFM v3 Webshell.
 
 [https://github.com/Reboare/Cfm\_Shell\_v3.0\_edition](https://github.com/Reboare/Cfm_Shell_v3.0_edition)
 

@@ -327,6 +327,8 @@ This isn't directly exploitable, but utilized correctly can allow you to view a 
 
 [Alternative Script](ftp://ftp.embeddedarm.com/ts-arm-sbc/ts-7350-linux/samples/bmptoraw.c)
 
+[Debian Recommendations](https://wiki.debian.org/SystemGroups)
+
 ### World writable scripts invoked as root
 
 If you find a script that is owned by root but is writable by anyone you can add your own malicious code in that script that will escalate your privileges when the script is run as root. It might be part of a cronjob, or otherwise automatized, or it might be run by hand by a sysadmin. You can also check scripts that are called by these scripts.
