@@ -12,8 +12,9 @@ ipconfig /all
 route print
 
 #Linux
-ifconfig
 ifconfig -a
+ip addr
+route
 ```
 
 # Port forwarding and tunneling

@@ -99,7 +99,7 @@
 * [Containerisation Technology](lxc.md)
   * [LXD](lxc/containers.md)
   * [Docker](lxc/docker.md)
-* [Pivoting - Port forwarding - Tunneling](port_forwarding_and_tunneling.md)
+* [Pivoting](port_forwarding_and_tunneling.md)
 * [Network traffic analysis](network_traffic.md)
   * [Arp-spoofing](arp-spoofing.md)
     * [SSL-strip](ssl-strip.md)
