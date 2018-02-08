@@ -1,11 +1,10 @@
-# Local File Inclusion (LFI)
+# Local File Inclusion \(LFI\)
 
 Local file inclusion means unauthorized access to files on the system. This vulnerability lets the attacker gain access to sensitive files on the server, and it might also lead to gaining a shell.
 
-
 ## How does it work?
 
-The vulnerability stems from unsanitized user-input. LFI is particularly common in php-sites. 
+The vulnerability stems from unsanitized user-input. LFI is particularly common in php-sites.
 
 Here is an example of php-code vulnerable to LFI. As you can see we just pass in the url-parameter into the require-function without any sanitization. So the user can just add the path to any file.
 
@@ -19,7 +18,6 @@ In this example the user could just enter this string and retrieve the `/etc/pas
 ```
 http://example.com/page=../../../../../../etc/passwd
 ```
-
 
 ### Bypassing the added .php and other extra file-endings
 
@@ -35,8 +33,8 @@ The php is added to the filename, this will mean that we will not be able to fin
 ```
 http://example.com/page=../../../../../../etc/passwd%00
 ```
-This technique is usually called the nullbyte technique since `%00` is the nullbyte. The technique only works in versions below php 5.3. So look out for that.
 
+This technique is usually called the nullbyte technique since `%00` is the nullbyte. The technique only works in versions below php 5.3.
 
 Another way to deal with this problem is just to add a question mark to your attack-string. This way the stuff after gets interpreted as a parameter and therefore excluded. Here is an example:
 
@@ -58,12 +56,11 @@ Here you use a php-filter to convert it all into base64. So in return you get th
 base64 -d savefile.php
 ```
 
-
 ## Linux
 
 ### Tricks
 
-**Download config-files in a nice style-format**  
+**Download config-files in a nice style-format**
 
 If you read files straight in the browser the styling can becomes unbearable. Really difficult to read. A way around it is to download the files from the terminal. But that won't work if there is a login that is blocking it. So this is a great workaround:
 
@@ -208,12 +205,11 @@ Connection: close
 
 **Execute it in the browser**
 
-Now you can request the log-file through the LFI and see the php-code get executed. 
+Now you can request the log-file through the LFI and see the php-code get executed.
 
 ```
 http://192.168.1.102/index.php?page=../../../../../var/log/apache2/access.log&cmd=id
 ```
-
 
 ### Proc files
 
@@ -302,7 +298,7 @@ And this:
 
 [https://websec.wordpress.com/2010/02/22/exploiting-php-file-inclusion-overview/](https://websec.wordpress.com/2010/02/22/exploiting-php-file-inclusion-overview/)
 
-[https://nets.ec/File\_Inclusion](https://nets.ec/File_Inclusion)  
+[https://nets.ec/File\_Inclusion](https://nets.ec/File_Inclusion)
 
 [https://gist.github.com/sckalath/da1a232f362a700ab459](https://gist.github.com/sckalath/da1a232f362a700ab459)
 
