@@ -109,3 +109,5 @@ This one allows easy directory traversal which the standard Kali one lacks.
 [http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/](http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/)  
 [http://www.binarytides.com/web-shells-tutorial/](http://www.binarytides.com/web-shells-tutorial/)
 
+
+

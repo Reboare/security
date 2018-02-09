@@ -96,6 +96,8 @@ Comes from here: [https://gist.github.com/sckalath/a8fd4e754a72015aa0b8](https:/
 /var/log/dmessage
 ```
 
+[https://wiki.apache.org/httpd/DistrosDefaultLayout\#Debian.2C\_Ubuntu\_.28Apache\_httpd\_2.x.29](https://wiki.apache.org/httpd/DistrosDefaultLayout#Debian.2C_Ubuntu_.28Apache_httpd_2.x.29):
+
 **Web server files**
 
 ```
