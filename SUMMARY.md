@@ -75,7 +75,7 @@
   * [Meterpreter for Post-Exploitation](getting_meterpreter_shell.md)
   * [Privilege Escalation - Linux](privilege_escalation_-_linux.md)
   * [Privilege Escalation - Windows](privilege_escalation_windows.md)
-  * [Escaping Restricted Shell/Program](escaping_restricted_shell.md)
+  * [Escaping Restricted Shells](escaping_restricted_shell.md)
   * [Bypassing antivirus](bypassing_antivirus.md)
   * [Loot and Enumerate](loot.md)
     * [Loot Windows](loot_windows_-_for_credentials_and_other_stuff.md)
