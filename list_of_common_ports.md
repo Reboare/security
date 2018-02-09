@@ -1,20 +1,17 @@
-# Common ports/services and how to use them
+# Common ports/services
 
 I will try to make this chapter into a reference library. So that you can just check in this chapter to see common ways to exploit certain common services. I will only discuss the most common, since there are quite a few.
 
-
-This is fucking awesome. if there is any ports here you dont find check out this guide.
-http://www.0daysecurity.com/penetration-testing/enumeration.html
+This is fucking awesome. if there is any ports here you dont find check out this guide.  
+[http://www.0daysecurity.com/penetration-testing/enumeration.html](http://www.0daysecurity.com/penetration-testing/enumeration.html)
 
 ## Port XXX - Service unknown
 
-If you have a port open with unkown service you can do this to find out which service it might be.
+If you have a port open with unknown service you can do this to find out which service it might be.
 
 ```
 amap -d 192.168.19.244 8000
 ```
-
-
 
 ## Port 21 - FTP
 
@@ -29,30 +26,29 @@ Many ftp-servers allow anonymous users. These might be misconfigured and give to
 
 **Remember the binary and ascii mode!**
 
-If you upload a binary file you have to put the ftp-server in binary mode, otherwise the file will become corrupted and you will not be able to use it! The same for text-files. Use ascii mode for them!
+If you upload a binary file you have to put the ftp-server in binary mode, otherwise the file will become corrupted and you will not be able to use it! The same for text-files. Use ascii mode for them!  
 You just write **binary** and **ascii** to switch mode.
 
 ## Port 22 - SSH
 
-SSH is such an old and fundamental technology so most modern version are quite hardened.
+SSH is such an old and fundamental technology so most modern version are quite hardened.  
 You can find out the version of the SSH either but scanning it with nmap or by connecting with it using `nc`.
 
 ```
 nc 192.168.1.10 22
 ```
 
-It returnes something like this:
-SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu1
+It returnes something like this:  
+SSH-2.0-OpenSSH\_7.2p2 Ubuntu-4ubuntu1
 
-This banner is defined in RFC4253, in chapter 4.2 Protocol Version Exchange. http://www.openssh.com/txt/rfc4253.txt
-The protocol-version string should be defined like this: `SSH-protoversion-softwareversion SP comments CR LF`
-Where comments is optional. And SP means space, and CR (carriege return) and LF (Line feed)
-So basically the comments should be separated by a space. 
-
+This banner is defined in RFC4253, in chapter 4.2 Protocol Version Exchange. [http://www.openssh.com/txt/rfc4253.txt](http://www.openssh.com/txt/rfc4253.txt)  
+The protocol-version string should be defined like this: `SSH-protoversion-softwareversion SP comments CR LF`  
+Where comments is optional. And SP means space, and CR \(carriege return\) and LF \(Line feed\)  
+So basically the comments should be separated by a space.
 
 ## Port 23 - Telnet
 
-Telnet is considered insecure mainly because it does not encrypt its traffic. Also a quick search in exploit-db will show that there are various RCE-vulnerabilities on different versions. Might be worth checking out. 
+Telnet is considered insecure mainly because it does not encrypt its traffic. Also a quick search in exploit-db will show that there are various RCE-vulnerabilities on different versions. Might be worth checking out.
 
 **Brute force it**
 
@@ -64,7 +60,7 @@ hydra -l root -P /root/SecLists/Passwords/10_million_password_list_top_100.txt 1
 
 ## Port 25 - SMTP
 
-SMTP is a server to server service. The user receives or sends emails using IMAP or POP3. Those messages are then routed to the SMTP-server which communicates the email to another server.
+SMTP is a server to server service. The user receives or sends emails using IMAP or POP3. Those messages are then routed to the SMTP-server which communicates the email to another server.  
 The SMTP-server has a database with all emails that can receive or send emails. We can use SMTP to query that database for possible email-addresses. Notice that we cannot retrieve any emails from SMTP. We can only send emails.
 
 Here are the possible commands
@@ -107,8 +103,6 @@ Telnet is a bit more friendly some times. So always use that too
 telnet 10.11.1.229 25
 ```
 
-
-
 ### Automatized
 
 This process can of course be automatized
@@ -149,8 +143,6 @@ Target domain ............
 8607 queries in 112 seconds (76.8 queries / sec)
 ```
 
-
-
 #### Metasploit
 
 I can also be done using metasploit
@@ -170,18 +162,16 @@ Module options (auxiliary/scanner/smtp/smtp_enum):
    USER_FILE  /usr/share/metasploit-framework/data/wordlists/unix_users.txt  yes       The file that contains a list of probable users accounts.
 ```
 
-Here are the documentations for SMTP
-https://cr.yp.to/smtp/vrfy.html
+Here are the documentations for SMTP  
+[https://cr.yp.to/smtp/vrfy.html](https://cr.yp.to/smtp/vrfy.html)
 
-http://null-byte.wonderhowto.com/how-to/hack-like-pro-extract-email-addresses-from-smtp-server-0160814/
+[http://null-byte.wonderhowto.com/how-to/hack-like-pro-extract-email-addresses-from-smtp-server-0160814/](http://null-byte.wonderhowto.com/how-to/hack-like-pro-extract-email-addresses-from-smtp-server-0160814/)
 
-http://www.dummies.com/how-to/content/smtp-hacks-and-how-to-guard-against-them.html
+[http://www.dummies.com/how-to/content/smtp-hacks-and-how-to-guard-against-them.html](http://www.dummies.com/how-to/content/smtp-hacks-and-how-to-guard-against-them.html)
 
-http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum
+[http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum](http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum)
 
-https://pentestlab.wordpress.com/2012/11/20/smtp-user-enumeration/
-
-
+[https://pentestlab.wordpress.com/2012/11/20/smtp-user-enumeration/](https://pentestlab.wordpress.com/2012/11/20/smtp-user-enumeration/)
 
 ## Port 69 - TFTP
 
@@ -197,9 +187,10 @@ We usually just think of vulnerabilities on the http-interface, the web page, wh
 
 **Step 1**
 
-Create a directory that you want to password-protect.
-Create .htaccess tile inside that directory.
+Create a directory that you want to password-protect.  
+Create .htaccess tile inside that directory.  
 Content of .htaccess:
+
 ```
 AuthType Basic
 AuthName "Password Protected Area"
@@ -220,7 +211,7 @@ If the directory does not display a login-prompt, you might have to change the *
 
 ```
 <Directory /var/www/html/test>
-	AllowOverride AuthConfig
+    AllowOverride AuthConfig
 </Directory>
 ```
 
@@ -234,16 +225,16 @@ medusa -h 192.168.1.101 -u admin -P wordlist.txt -M http -m DIR:/test -T 10
 
 ## Port 88 - Kerberos
 
-Kerberos is a protocol that is used for network authentication. Different versions are used by *nix and Windows. But if you see a machine with port 88 open you can be fairly certain that it is a Windows Domain Controller.
+Kerberos is a protocol that is used for network authentication. Different versions are used by \*nix and Windows. But if you see a machine with port 88 open you can be fairly certain that it is a Windows Domain Controller.
 
 If you already have a login to a user of that domain you might be able to escalate that privilege.
 
-Check out:
+Check out:  
 MS14-068
 
 ## Port 110 - Pop3
 
-This service is used for fetching emails on a email server. So the server that has this port open is probably an email-server, and other clients on the network (or outside) access this server to fetch their emails.
+This service is used for fetching emails on a email server. So the server that has this port open is probably an email-server, and other clients on the network \(or outside\) access this server to fetch their emails.
 
 ```
 telnet 192.168.1.105 110
@@ -261,7 +252,7 @@ retr 5
 
 RFC: 1833
 
-Rpcbind can help us look for NFS-shares. So look out for nfs.
+Rpcbind can help us look for NFS-shares. So look out for nfs.  
 Obtain list of services running with RPC:
 
 ```
@@ -270,17 +261,15 @@ rpcbind -p 192.168.1.101
 
 ## Port 119 - NNTP
 
-Network time protocol. 
-It is used synchronize time. If a machine is running this server it might work as a server for synchronizing time. So other machines query this machine for the exact time. 
+Network time protocol.   
+It is used synchronize time. If a machine is running this server it might work as a server for synchronizing time. So other machines query this machine for the exact time.
 
 An attacker could use this to change the time. Which might cause denial of service and all around havoc.
 
-
 ## Port 135 - MSRPC
 
-This is the windows rpc-port.
-https://en.wikipedia.org/wiki/Microsoft_RPC
-
+This is the windows rpc-port.  
+[https://en.wikipedia.org/wiki/Microsoft\_RPC](https://en.wikipedia.org/wiki/Microsoft_RPC)
 
 ### Enumerate
 
@@ -291,7 +280,6 @@ nmap 192.168.0.101 --script=msrpc-enum
 ```
 msf > use exploit/windows/dcerpc/ms03_026_dcom
 ```
-
 
 ## Port 139 and 445- SMB/Samba shares
 
@@ -305,15 +293,15 @@ For linux-users you can log in to the smb-share using smbclient, like this:
 smbclient -L 192.168.1.102
 smbclient //192.168.1.106/tmp
 smbclient \\\\192.168.1.105\\ipc$ -U john 
-smbclient //192.168.1.105/ipc$ -U john  
+smbclient //192.168.1.105/ipc$ -U john
 ```
 
 If you don't provide any password, just click enter, the server might show you the different shares and version of the server. This can be useful information for looking for exploits. There are tons of exploits for smb.
 
 So smb, for a linux-user, is pretty much like and ftp or a nfs.
 
-Here is a good guide for how to configure samba:
-https://help.ubuntu.com/community/How%20to%20Create%20a%20Network%20Share%20Via%20Samba%20Via%20CLI%20(Command-line%20interface/Linux%20Terminal)%20-%20Uncomplicated,%20Simple%20and%20Brief%20Way!
+Here is a good guide for how to configure samba:  
+[https://help.ubuntu.com/community/How to Create a Network Share Via Samba Via CLI \(Command-line interface/Linux Terminal\) - Uncomplicated, Simple and Brief Way!](https://help.ubuntu.com/community/How to Create a Network Share Via Samba Via CLI %28Command-line interface/Linux Terminal%29 - Uncomplicated, Simple and Brief Way!)
 
 ```
 mount -t cifs -o user=USERNAME,sec=ntlm,dir_mode=0077 "//10.10.10.10/My Share" /mnt/cifs
@@ -332,10 +320,10 @@ use exploit/windows/smb/psexec
 Scanning for smb with Nmap
 
 ```
-nmap -p 139,445 192.168.1.1/24 
+nmap -p 139,445 192.168.1.1/24
 ```
-There are several NSE scripts that can be useful, for example:
 
+There are several NSE scripts that can be useful, for example:
 
 ```
 ls -l /usr/share/nmap/scripts/smb*
@@ -383,7 +371,7 @@ It can be a bit buggy sometimes so run it several times to make sure it found al
 
 ### Enum4linux
 
-Enum4linux can be used to enumerate windows and linux machines with smb-shares. 
+Enum4linux can be used to enumerate windows and linux machines with smb-shares.
 
 The do all option:
 
@@ -391,7 +379,7 @@ The do all option:
 enum4linux -a 192.168.1.120
 ```
 
-For info about it ere: https://labs.portcullis.co.uk/tools/enum4linux/
+For info about it ere: [https://labs.portcullis.co.uk/tools/enum4linux/](https://labs.portcullis.co.uk/tools/enum4linux/)
 
 ### rpcclient
 
@@ -416,7 +404,7 @@ netshareenumall
 
 ## Port 143/993 - IMAP
 
-IMAP lets you access email stored on that server. So imagine that you are on a network at work, the emails you recieve is not stored on your computer but on a specific mail-server. So every time you look in your inbox your email-client (like outlook) fetches the emails from the mail-server using imap.
+IMAP lets you access email stored on that server. So imagine that you are on a network at work, the emails you recieve is not stored on your computer but on a specific mail-server. So every time you look in your inbox your email-client \(like outlook\) fetches the emails from the mail-server using imap.
 
 IMAP is a lot like pop3. But with IMAP you can access your email from various devices. With pop3 you can only access them from one device.
 
@@ -430,22 +418,24 @@ SNMP protocols 1,2 and 2c does not encrypt its traffic. So it can be intercepted
 
 SNMP is used to manage devices on a network. It has some funny terminology. For example, instead of using the word password the word community is used instead. But it is kind of the same thing. A common community-string/password is public.
 
-You can have read-only access to the snmp.Often just with the community string `public`. 
+You can have read-only access to the snmp.Often just with the community string `public`.
 
 Common community strings
+
 ```
 public
 private
 community
 ```
 
-Here is a longer list of common community strings: https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/wordlist-common-snmp-community-strings.txt
+Here is a longer list of common community strings: [https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/wordlist-common-snmp-community-strings.txt](https://github.com/danielmiessler/SecLists/blob/master/Miscellaneous/wordlist-common-snmp-community-strings.txt)
 
 ### MIB - Management information base
 
 SNMP stores all teh data in the Management Information Base. The MIB is a database that is organized as a tree. Different branches contains different information. So one branch can be username information, and another can be processes running. The "leaf" or the endpoint is the actual data. If you have read-access to the database you can read through each endpoint in the tree. This can be used with snmpwalk. It walks through the whole database tree and outputs the content.
 
 #### snmpwalk
+
 ```
 snmpwalk -c public -v1 192.168.1.101 #community string and which version
 ```
@@ -466,46 +456,36 @@ Now we can use this to query the data we really want.
 
 #### snmpenum
 
-
 #### snmp-check
 
 This is a bit easier to use and with a lot prettier output.
-``` 
+
+```
 snmp-check -t 192.168.1.101 -c public
 ```
 
 ### Scan for open ports - Nmap
+
 Since SNMP is using UDP we have to use the `-sU` flag.
 
 ```
 nmap -iL ips.txt -p 161,162 -sU --open -vvv -oG snmp-nmap.txt
 ```
 
-### Onesixtyone
-
-With onesixtyone you can test for open ports but also brute force community strings.
-I have had more success using onesixtyone than using nmap. So better use both.
-
-```
-
-```
-
 ### Metasploit
 
-There are a few snmp modules in metasploit that you can use. snmp_enum can show you usernames, services, and other stuff.
+There are a few snmp modules in metasploit that you can use. snmp\_enum can show you usernames, services, and other stuff.
 
-https://www.offensive-security.com/metasploit-unleashed/snmp-scan/
-
+[https://www.offensive-security.com/metasploit-unleashed/snmp-scan/](https://www.offensive-security.com/metasploit-unleashed/snmp-scan/)
 
 ## Port 199 - Smux
 
 ## Port 389/636 - Ldap
 
-Lightweight Directory Access Protocol.
-This port is usually used for Directories. Directory her means more like a telephone-directory rather than a folder. Ldap directory can be understood a bit like the windows registry. A database-tree. Ldap is sometimes used to store usersinformation. 
-Ldap is used more often in corporate structure.
+Lightweight Directory Access Protocol.  
+This port is usually used for Directories. Directory her means more like a telephone-directory rather than a folder. Ldap directory can be understood a bit like the windows registry. A database-tree. Ldap is sometimes used to store usersinformation.   
+Ldap is used more often in corporate structure.  
 Webapplications can use ldap for authentication. If that is the case it is possible to perform **ldap-injections** which are similar to sqlinjections.
-
 
 You can sometimes access the ldap using a anonymous login, or with other words no session. This can be useful becasue you might find some valuable data, about users.
 
@@ -513,8 +493,7 @@ You can sometimes access the ldap using a anonymous login, or with other words n
 ldapsearch -h 192.168.1.101 -p 389 -x -b "dc=mywebsite,dc=com"
 ```
 
-
-When a client connects to the Ldap directory it can use it to query data, or add or remove. 
+When a client connects to the Ldap directory it can use it to query data, or add or remove.
 
 Port 636 is used for SSL.
 
@@ -522,18 +501,16 @@ There are also metasploit modules for Windows 2000 SP4 and Windows Xp SP0/SP1
 
 ## Port 443 - HTTPS
 
-Okay this is only here as a reminder to always check for SSL-vulnerabilities such as heartbleed. For more on how to exploit web-applications check out the chapter on client-side vulnerabilities. 
+Okay this is only here as a reminder to always check for SSL-vulnerabilities such as heartbleed. For more on how to exploit web-applications check out the chapter on client-side vulnerabilities.
 
 ### Heartbleed
 
-OpenSSL 1.0.1 through 1.0.1f (inclusive) are vulnerable
-OpenSSL 1.0.1g is NOT vulnerable
-OpenSSL 1.0.0 branch is NOT vulnerable
+OpenSSL 1.0.1 through 1.0.1f \(inclusive\) are vulnerable  
+OpenSSL 1.0.1g is NOT vulnerable  
+OpenSSL 1.0.0 branch is NOT vulnerable  
 OpenSSL 0.9.8 branch is NOT vulnerable
 
 First we need to investigate if the https-page is vulnerable to [heartbleed](http://heartbleed.com/)
-
-
 
 We can do that the following way.
 
@@ -544,7 +521,7 @@ sudo sslscan 192.168.101.1:443
 or using a nmap script
 
 ```
-nmap -sV --script=ssl-heartbleed 192.168.101.8 
+nmap -sV --script=ssl-heartbleed 192.168.101.8
 ```
 
 You can exploit the vulnerability in many different ways. There is a module for it in burp suite, and metasploit also has a module for it.
@@ -564,29 +541,30 @@ Now you have a flow of random data, some of it might be of interest to you.
 
 ### Certificate
 
-Read the certificate. 
-- Does it include names that might be useful?
-- Correct vhost
+Read the certificate.
+
+* Does it include names that might be useful?
+* Correct vhost
 
 # Port 554 - RTSP
 
-RTSP (Real Time Streaming Protocol) is a stateful protocol built on top of tcp usually used for streaming images. Many commercial IP-cameras are running on this port. They often have a GUI interface, so look out for that. 
+RTSP \(Real Time Streaming Protocol\) is a stateful protocol built on top of tcp usually used for streaming images. Many commercial IP-cameras are running on this port. They often have a GUI interface, so look out for that.
 
 ## Port 587 - Submission
 
 Outgoing smtp-port
 
-If Postfix is run on it it could be vunerable to shellshock
-https://www.exploit-db.com/exploits/34896/
-
+If Postfix is run on it it could be vunerable to shellshock  
+[https://www.exploit-db.com/exploits/34896/](https://www.exploit-db.com/exploits/34896/)
 
 ## Port 631 - Cups
-Common UNIX Printing System has become the standard for sharing printers on a linux-network. 
-You will often see port 631 open in your priv-esc enumeration when you run `netstat`. You can log in to it here: **http://localhost:631/admin**
+
+Common UNIX Printing System has become the standard for sharing printers on a linux-network.   
+You will often see port 631 open in your priv-esc enumeration when you run `netstat`. You can log in to it here: [http://localhost:631/admin](http://localhost:631/admin)
 
 You authenticate with the OS-users.
 
-Find version. Test **cups-config --version**. If this does not work surf to **http://localhost:631/printers** and see the CUPS version in the title bar of your browser.
+Find version. Test **cups-config --version**. If this does not work surf to [http://localhost:631/printers](http://localhost:631/printers) and see the CUPS version in the title bar of your browser.
 
 There are vulnerabilities for it so check your searchsploit.
 
@@ -596,15 +574,14 @@ The default port for the Imap-protocol.
 
 ## Port 995 - POP3 Encrypten
 
-Port 995 is the default port for the **Post Office Protocol**.
-The protocol is used for clients to connect to the server and download their emails locally. 
+Port 995 is the default port for the **Post Office Protocol**.  
+The protocol is used for clients to connect to the server and download their emails locally.   
 You usually see this port open on mx-servers. Servers that are meant to send and recieve email.
 
-Related ports: 
+Related ports:   
 110 is the POP3 non-encrypted.
 
 25, 465
-
 
 ## Port 1025 - NFS or IIS
 
@@ -613,7 +590,6 @@ I have seen them open on windows machine. But nothing has been listening on it.
 ## Port 1030/1032/1033/1038
 
 I think these are used by the RPC within Windows Domains. I have found no use for them so far. But they might indicate that the target is part of a Windows domain. Not sure though.
-
 
 ## Port 1433 - MsSQL
 
@@ -630,7 +606,6 @@ sqsh -S 192.168.1.101 -U sa
 xp_cmdshell 'date'
 go
 ```
-
 
 Many o the scanning modules in metasploit requires authentication. But some do not.
 
@@ -663,20 +638,17 @@ auxiliary/scanner/oracle/sid_brute
 
 Connect to the database with `sqlplus`
 
-
 References:
 
-http://www.red-database-security.com/wp/itu2007.pdf
-
+[http://www.red-database-security.com/wp/itu2007.pdf](http://www.red-database-security.com/wp/itu2007.pdf)
 
 ## Ports 1748, 1754, 1808, 1809 - Oracle
 
 These are also ports used by oracle on windows. They run Oracles **Intelligent Agent**.
 
-
 ## Port 2049 - NFS
 
-Network file system
+Network file system  
 This is a service used so that people can access certain parts of a remote filesystem. If this is badly configured it could mean that you grant excessive access to users.
 
 If the service is on its default port you can run this command to see what the filesystem is sharing
@@ -698,23 +670,19 @@ This can be used to escalate privileges if it is not correct configured. Check c
 
 ## Port 2100 - Oracle XML DB
 
-There are some exploits for this, so check it out. You can use the default Oracle users to access to it. You can use the normal ftp protocol to access it. 
+There are some exploits for this, so check it out. You can use the default Oracle users to access to it. You can use the normal ftp protocol to access it.
 
-Can be accessed through ftp.
-Some default passwords here: 
-https://docs.oracle.com/cd/B10501_01/win.920/a95490/username.htm
-Name: 
+Can be accessed through ftp.  
+Some default passwords here:   
+[https://docs.oracle.com/cd/B10501\_01/win.920/a95490/username.htm](https://docs.oracle.com/cd/B10501_01/win.920/a95490/username.htm)  
+Name:   
 Version:
 
-Default logins:
-sys:sys
+Default logins:  
+sys:sys  
 scott:tiger
 
-
 ## Port 3268 - globalcatLdap
-
-
-
 
 ## Port 3306 - MySQL
 
@@ -747,70 +715,75 @@ This occurs because mysql is configured so that the root user is only allowed to
 cat /etc/my.cnf
 ```
 
-http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html
+[http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html](http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html)
 
 ### Mysql-commands cheat sheet
-    
-    http://cse.unl.edu/~sscott/ShowFiles/SQL/CheatSheet/SQLCheatSheet.html
+
+```
+http://cse.unl.edu/~sscott/ShowFiles/SQL/CheatSheet/SQLCheatSheet.html
+```
 
 ### Uploading a shell
-    
-    You can also use mysql to upload a shell
+
+```
+You can also use mysql to upload a shell
+```
 
 ### Escalating privileges
 
 If mysql is started as root you might have a chance to use it as a way to escalate your privileges.
 
 #### MYSQL UDF INJECTION:
-https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/
 
+[https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/](https://infamoussyn.com/2014/07/11/gaining-a-root-shell-using-mysql-user-defined-functions-and-setuid-binaries/)
 
 ### Finding passwords to mysql
 
 You might gain access to a shell by uploading a reverse-shell. And then you need to escalate your privilege. One way to do that is to look into the databse and see what users and passwords that are available. Maybe someone is resuing a password?
 
 So the first step is to find the login-credencials for the database. Those are usually found in some configuration-file oon the web-server. For example, in joomla they are found in:
+
 ```
 /var/www/html/configuration.php
 ```
-In that file you find the 
+
+In that file you find the
 
 ```php
 <?php
 class JConfig {
-	var $mailfrom = 'admin@rainng.com';
-	var $fromname = 'testuser';
-	var $sendmail = '/usr/sbin/sendmail';
-	var $password = 'myPassowrd1234';
-	var $sitename = 'test';
-	var $MetaDesc = 'Joomla! - the dynamic portal engine and content management system';
-	var $MetaKeys = 'joomla, Joomla';
-	var $offline_message = 'This site is down for maintenance. Please check back again soon.';
-	}
- ```
-    
-    
+    var $mailfrom = 'admin@rainng.com';
+    var $fromname = 'testuser';
+    var $sendmail = '/usr/sbin/sendmail';
+    var $password = 'myPassowrd1234';
+    var $sitename = 'test';
+    var $MetaDesc = 'Joomla! - the dynamic portal engine and content management system';
+    var $MetaKeys = 'joomla, Joomla';
+    var $offline_message = 'This site is down for maintenance. Please check back again soon.';
+    }
+```
 
 ## Port 3339 - Oracle web interface
-
 
 ## Port 3389 - Remote Desktop Protocol
 
 This is a proprietary protocol developed by windows to allow remote desktop.
 
 Log in like this
+
 ```
 rdesktop -u guest -p guest 10.11.1.5 -g 94%
 ```
 
 Brute force like this
+
 ```
 ncrack -vv --user Administrator -P /root/passwords.txt rdp://192.168.1.101
 ```
 
 ### Ms12-020
 
-This is categorized by microsoft as a RCE vulnerability. But there is no POC for it online. You can only DOS a machine using this exploit. 
+This is categorized by microsoft as a RCE vulnerability. But there is no POC for it online. You can only DOS a machine using this exploit.
 
 ## Port 4445 - Upnotifyp
 
@@ -818,11 +791,11 @@ I have not found anything here. Try connecting with netcat and visiting in brows
 
 ## Port 4555 - RSIP
 
-I have seen this port being used by Apache James Remote Configuration. 
+I have seen this port being used by Apache James Remote Configuration.
 
 There is an exploit for version 2.3.2
 
-https://www.exploit-db.com/docs/40123.pdf
+[https://www.exploit-db.com/docs/40123.pdf](https://www.exploit-db.com/docs/40123.pdf)
 
 ## Port 47001 - Windows Remote Management Service
 
@@ -832,10 +805,9 @@ Windows Remote Management Service
 
 ## Port 5722 - DFSR
 
-> The Distributed File System Replication (DFSR) service is a state-based, multi-master file replication engine that automatically copies updates to files and folders between computers that are participating in a common replication group. DFSR was added in Windows Server 2003 R2.
+> The Distributed File System Replication \(DFSR\) service is a state-based, multi-master file replication engine that automatically copies updates to files and folders between computers that are participating in a common replication group. DFSR was added in Windows Server 2003 R2.
 
-I am not sure how what can be done with this port. But if it is open it is a sign that the machine in question might be a Domain Controller. 
-
+I am not sure how what can be done with this port. But if it is open it is a sign that the machine in question might be a Domain Controller.
 
 ## Port 5900 - VNC
 
@@ -852,20 +824,19 @@ set session X
 exploit
 ```
 
-
 ```
 vncviewer 192.168.1.109
 ```
 
 ### Ctr-alt-del
 
-If you are unable to input ctr-alt-del (kali might interpret it as input for kali).
+If you are unable to input ctr-alt-del \(kali might interpret it as input for kali\).
 
 Try `shift-ctr-alt-del`
 
 ### Metasploit scanner
 
-You can scan VNC for logins, with bruteforce. 
+You can scan VNC for logins, with bruteforce.
 
 **Login scan**
 
@@ -883,7 +854,6 @@ set rhosts 192.168.1.109
 run
 ```
 
-
 ## Port 8080
 
 Since this port is used by many different services. They are divided like this.
@@ -892,6 +862,9 @@ Since this port is used by many different services. They are divided like this.
 
 Tomcat suffers from default passwords. There is even a module in metasploit that enumerates common tomcat passwords. And another module for exploiting it and giving you a shell.
 
-## Port 9389 - 
+## Port 9389 -
 
-> Active Directory Administrative Center is installed by default on Windows Server 2008 R2 and is available on Windows 7 when you install the Remote Server Administration Tools (RSAT).
+> Active Directory Administrative Center is installed by default on Windows Server 2008 R2 and is available on Windows 7 when you install the Remote Server Administration Tools \(RSAT\).
+
+
+

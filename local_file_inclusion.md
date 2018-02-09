@@ -102,6 +102,13 @@ Comes from here: [https://gist.github.com/sckalath/a8fd4e754a72015aa0b8](https:/
 # Usually found in the root of the website
 .htaccess
 config.php
+
+# apache
+/sites-enabled/000-default.conf
+
+# nginx
+
+/sites-enabled/default
 ```
 
 **SSH**

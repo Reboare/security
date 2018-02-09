@@ -1,8 +1,6 @@
 # Port knocking
 
-Port-knocking the a obfuscation-as-security technique. It basically means that after knocking on ports in a specific sequence a certain port will open automatically. It seems to be more popular in Capture-the-flag contests than real life networks. But I have included it anyways, since CTF:s are great.
-
-This is a way to hide certain ports, so you don't get unwanted intrusion-intents.
+Port-knocking the a obfuscation-as-security technique. It basically means that after knocking on ports in a specific sequence a certain port will open automatically. It seems to be more popular in Capture-the-flag contests than real life networks.
 
 So for example, imagine you access your server through `ssh`. But you are tired of getting unwanted bruteforce attempts all day long. You can just have the SSH-port closed and when you knock on certain ports in a specific order the ssh-port opens up, maybe for a few minutes, or maybe indefinitely until you close it again.
 
@@ -15,7 +13,7 @@ I have seen the Knock software implemented.
 ## Opening
 
 So, how do we actually knock?  
-As mentioned before a knock is essentially just sending a packet to a specific port.   
+As mentioned before a knock is essentially just sending a packet to a specific port.  
 I guess there are quite a few ways to do this. But here are four ways.
 
 1. Knock
@@ -28,6 +26,7 @@ I guess there are quite a few ways to do this. But here are four ways.
 2. Nmap/bash
 
 3. `for x in 4000 5000 6000; do nmap -Pn --host_timeout 201 --max-retries 0 -p $x server_ip_address; done`
+
 4. Netcat
    ```
    nc 192.168.1.102 4000
