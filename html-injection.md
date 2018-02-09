@@ -1,4 +1,4 @@
-## HTML-Injection
+## HTML Injection
 
 This attack is really similar to to Cross-Site Scripting attacks.
 
@@ -15,12 +15,18 @@ Javascript can be injected into html-tags, which can be used to steal cookies an
 
 The attacker can inject html forms that tricks the user into giving up sensitive data.
 
-See eventhandlers for more ways: https://www.owasp.org/index.php/XSS\_Filter\_Evasion\_Cheat\_Sheet\#Event\_Handlers
+See eventhandlers for more ways: [https://www.owasp.org/index.php/XSS\_Filter\_Evasion\_Cheat\_Sheet\#Event\_Handlers](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet#Event_Handlers)
 
 ```
 <IMG SRC=# onmouseover="alert('xxs')">
-
 ```
+
+# Text/content-injection
+
+Relevant hackerone reports:  
+[https://hackerone.com/reports/145853](https://hackerone.com/reports/145853)
+
+[https://www.owasp.org/index.php/Content\_Spoofing](https://www.owasp.org/index.php/Content_Spoofing)
 
 
 
