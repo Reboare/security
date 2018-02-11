@@ -9,11 +9,12 @@ Before we start looking for privilege escalation opportunities we need to unders
 ```
 # Basics
 systeminfo
-hostname
+wmic qfe
 
 # Who am I?
 whoami
 echo %username%
+$env:UserName
 
 # What users/localgroups are on the machine?
 net users
@@ -92,6 +93,10 @@ reg query "HKCU\Software\SimonTatham\PuTTY\Sessions"
 # Search for password in registry
 reg query HKLM /f password /t REG_SZ /s
 reg query HKCU /f password /t REG_SZ /s
+
+# Search for Windows Autologon registry keys
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2>nul | findstr "DefaultUserName DefaultDomainName DefaultPassword"
+
 ```
 
 ## Service only available from inside
@@ -472,5 +477,8 @@ run post/windows/gather/checkvm
 [https://www.youtube.com/watch?v=PC\_iMqiuIRQ](https://www.youtube.com/watch?v=PC_iMqiuIRQ)  
 [http://www.harmj0y.net/blog/powershell/powerup-a-usage-guide/](http://www.harmj0y.net/blog/powershell/powerup-a-usage-guide/)  
 [https://github.com/PowerShellEmpire/PowerTools/tree/master/PowerUp](https://github.com/PowerShellEmpire/PowerTools/tree/master/PowerUp)  
-[http://pwnwiki.io/\#!privesc/windows/index.md](http://pwnwiki.io/#!privesc/windows/index.md)
+[http://pwnwiki.io/\#!privesc/windows/index.md](http://pwnwiki.io/#!privesc/windows/index.md)   
+[http://www.sploitspren.com/2018-01-26-Windows-Privilege-Escalation-Guide/](http://www.sploitspren.com/2018-01-26-Windows-Privilege-Escalation-Guide/)
+
+
 
