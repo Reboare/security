@@ -109,7 +109,6 @@ config.php
 /sites-enabled/000-default.conf
 
 # nginx
-
 /sites-enabled/default
 ```
 
@@ -153,21 +152,24 @@ Found in the home-directory
 
 "Under Linux, /proc includes a directory for each running process, including kernel processes, in directories named /proc/PID, where PID is the process number. Each directory contains information about one process, including: /proc/PID/cmdline, the command that originally started the process."
 
-[https://en.wikipedia.org/wiki/Procfs](https://en.wikipedia.org/wiki/Procfs)
-
-[https://blog.netspi.com/directory-traversal-file-inclusion-proc-file-system/](https://blog.netspi.com/directory-traversal-file-inclusion-proc-file-system/)
-
 ```
-/proc/sched_debug # Can be used to see what processes the machine is running
-/proc/mounts
-/proc/net/arp
+/proc/sched_debug # Can be used to see what pid's are being run, usually enabled on newer systems
+/proc/mounts # Provides a list of mounted file-systems
+/proc/net/arp 
 /proc/net/route
-/proc/net/tcp
-/proc/net/udp
+/proc/net/tcp 
+/proc/net/tcp6 
+/proc/net/udp 
+/proc/net/udp6
 /proc/net/fib_trie
 /proc/version
 /proc/self/environ
 ```
+
+When enumerating `/proc/net/{tcp,udp}{,6}` files, these can be difficult to read.  Using this [script](https://gist.github.com/Reboare/2e0122b993b8557935fd37b27436f8c2), will format the output correctly.
+
+[https://en.wikipedia.org/wiki/Procfs](https://www.gitbook.com/book/reboare/security/edit#)  
+[https://blog.netspi.com/directory-traversal-file-inclusion-proc-file-system/](https://www.gitbook.com/book/reboare/security/edit#)
 
 ## Bruteforcing SSH known\_hosts
 

@@ -126,9 +126,7 @@ Proto  Local address      Remote address     State        User  Inode  PID/Progr
 ```
 
 Look for **LISTENING/LISTEN**. Compare that to the scan you did from the outside.  
-Does it contain any ports that are not accessible from the outside?
-
-If that is the case, maybe you can make a remote forward to access it.
+Does it contain any ports that are not accessible from the outside?  Good candidates include mysql and VNC ports.  If that is the case, you may be able to set up a reverse port-forward:
 
 ```
 # Port forward using plink
