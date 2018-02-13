@@ -136,6 +136,10 @@ known_hosts
 /var/log/apache/access.log 
 /var/log/apache2/access.log
 /var/log/access_log
+/var/log/apache/error.log
+/var/log/vsftpd.log
+/var/log/sshd.log
+/var/log/mail
 ```
 
 **User specific files**
@@ -181,7 +185,7 @@ Under the right circumstances you might be able to get a shell from a LFI
 
 ### Log poisoning
 
-There are some requirements. We need to be able to read log files. In this example we are going to poison the apache log file. You can use either the success.log or the error.log
+There are some requirements. We need to be able to read log files. In this example we are going to poison the apache log file. 
 
 So once you have found a LFI vuln you have to inject php-code into the log file and then execute it.
 
@@ -226,7 +230,7 @@ http://192.168.1.102/index.php?page=../../../../../var/log/apache2/access.log&cm
 
 If you can read the proc-files on the system you might be able to poison them through the user-agent.
 
-We can also inject code into /proc/self/environ through the user-agent
+We can also inject code into `/proc/self/environ` through the user-agent, or `/proc/self/fd/{0-9}` files
 
 [https://www.exploit-db.com/papers/12992/](https://www.exploit-db.com/papers/12992/)
 
