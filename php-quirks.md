@@ -4,13 +4,14 @@ This section will focus on PHP in particular and a variety of quirks that might 
 
 ## Login Bypasses
 
-### strcmp 
+### Type Juggling
 
-### magic hashes
+| **Hash** | **Magic String** | **Magic Hash** |
+| :--- | :--- | :--- |
+| MD5 | 240610708 | 0e462097431906509019562988736854 |
+| SHA1 | 10932435112 | 0e07766915004133176347055865026311692244 |
+
+[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/PHP%20juggling%20type](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/PHP%20juggling%20type)
 
 [https://github.com/lucyoa/ctf-wiki/tree/master/web/php-quirks](https://github.com/lucyoa/ctf-wiki/tree/master/web/php-quirks)
-
-
-
-
 

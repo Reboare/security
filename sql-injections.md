@@ -293,6 +293,8 @@ We can then execute commands on the machine in the following manner:
 
 ### Second-Order SQL Injection
 
+In a second-order SQL Injection the injection ocurrs on a different page to the one originally expected.
+
 ## Truncating Mysql Vulerability
 
 Basically this happens when you don't validate the length of user input.  
