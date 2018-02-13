@@ -1,8 +1,19 @@
-# Escaping and Enumerating Containers
+# Escaping Containers
 
-Enumerating containers
+This section will focus on the two most popular containerisation technologies, Docker and LXD.  
+
+## User Namespaces
+
+[https://docs.docker.com/engine/security/userns-remap/\#enable-userns-remap-on-the-daemon](https://docs.docker.com/engine/security/userns-remap/#enable-userns-remap-on-the-daemon)  
+
+
+## Mount Points
+
+## Docker Specific
 
 ## LXD Specific
+
+### LXD Hooks
 
 ### Privileged Containers
 

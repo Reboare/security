@@ -2,8 +2,7 @@
 
 ## Meterpreter
 
-If you have a meterpreter shell you are able to do a lot of thing with very little effort.  
-If you do not have a meterpreter-shell you can always create a exploit with msfvenom. An elf or exe or other format to upgrade your shell.
+If you have a meterpreter shell you are able to do a lot of thing with very little effort.  If you do not have a meterpreter-shell you can always create a exploit with msfvenom. An elf or exe or other format to upgrade your shell.
 
 Show help of all commands:
 
