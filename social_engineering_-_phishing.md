@@ -50,11 +50,9 @@ http://evilsite.com/file.js
 
 This code can be modified to greate a wget-script and then download and execute a script.
 
-
 ## Phishing
 
 The most common tool for social engineering is to use Social Engineering Toolkit. SET. It comes as default in Kali. Run it like this:
-
 
 ```
 setoolkit
@@ -62,15 +60,23 @@ setoolkit
 
 ## Spear phishing
 
-## Word/excel makros
+## Word/excel macros
 
 An explanation of how to createa malicious makro-wordfile.
 
-https://www.offensive-security.com/metasploit-unleashed/vbscript-infection-methods/
+[https://www.offensive-security.com/metasploit-unleashed/vbscript-infection-methods/](https://www.offensive-security.com/metasploit-unleashed/vbscript-infection-methods/)
+
+## DDE Injection
+
+This method is more well-known nowadays, but it can still be used to get code injection on a remote PC as macros will commonly be spotted.
+
+[https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/](https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/)
 
 ## Embed a executable inside a PowerPoint
 
-You can embed executables inside PowerPoint presentations and then have them execute about animations. 
+You can embed executables inside PowerPoint presentations and then have them execute about animations.
 
 ## Reference:
-https://www.youtube.com/watch?v=NTdthBQYa1k
+
+[https://www.youtube.com/watch?v=NTdthBQYa1k](https://www.youtube.com/watch?v=NTdthBQYa1k)
+
